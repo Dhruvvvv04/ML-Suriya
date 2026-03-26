@@ -1,0 +1,3195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>M L Suriya – Peaceful Profit Monk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=Noto+Serif+Devanagari:wght@400;500;600&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+<style>
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ROOT DESIGN TOKENS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+:root {
+  --white: #ffffff;
+  --off-white: #faf9ff;
+  --bg: #f7f5fe;
+
+  --p900: #160a2e;
+  --p800: #2b1260;
+  --p700: #4a1f94;
+  --p600: #6b35c8;
+  --p500: #8b5cf6;
+  --p400: #a78bfa;
+  --p300: #c4b5fd;
+  --p200: #ddd6fe;
+  --p100: #ede9fe;
+
+  --gold:  #f0c040;
+  --coral: #f07070;
+  --rose:  #e879f9;
+
+  --ink:  #160a2e;
+  --ink2: #3d2870;
+  --muted:#8b7aaa;
+
+  --glass-bg:     rgba(255,255,255,0.45);
+  --glass-border: rgba(255,255,255,0.80);
+  --glass-shadow: 0 8px 40px rgba(107,53,200,0.10), inset 0 1px 0 rgba(255,255,255,0.9);
+
+  /* ── Font System: 2 fonts only ── */
+  --font-display: 'Cormorant Garamond', Georgia, serif;   /* headings, names, quotes, Sanskrit */
+  --font-ui:      'DM Sans', system-ui, sans-serif;       /* body, labels, tags, nav, buttons */
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body{
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x:hidden;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SPIRITUAL ANIMATED BACKGROUND
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.aura-bg{
+  position:fixed;inset:0;z-index:0;
+  overflow:hidden;pointer-events:none;
+}
+
+/* Canvas for JS-drawn spiritual particles */
+#spiritual-canvas{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  opacity:0.55;
+}
+
+/* Soft orbs — kept but lighter */
+.aura-orb{
+  position:absolute;border-radius:50%;
+  filter:blur(110px);opacity:0;
+}
+.aura-orb-1{
+  width:800px;height:800px;top:-200px;left:-200px;
+  background:radial-gradient(circle at 40% 40%,rgba(139,92,246,0.42)0%,rgba(167,139,250,0.18)40%,transparent 70%);
+  animation:orbReveal 1.5s ease 0.2s forwards,drift1 22s ease-in-out 2s infinite alternate;
+}
+.aura-orb-2{
+  width:600px;height:600px;top:-100px;right:-150px;
+  background:radial-gradient(circle at 50% 50%,rgba(240,192,64,0.38)0%,rgba(232,121,249,0.15)50%,transparent 70%);
+  animation:orbReveal 1.5s ease 0.5s forwards,drift2 28s ease-in-out 2s infinite alternate;
+}
+.aura-orb-3{
+  width:700px;height:700px;bottom:-200px;right:-100px;
+  background:radial-gradient(circle at 50% 50%,rgba(107,53,200,0.34)0%,rgba(240,112,112,0.12)50%,transparent 70%);
+  animation:orbReveal 1.5s ease 0.8s forwards,drift3 24s ease-in-out 2s infinite alternate;
+}
+.aura-orb-4{
+  width:500px;height:500px;bottom:10%;left:-100px;
+  background:radial-gradient(circle at 50% 50%,rgba(232,121,249,0.28)0%,rgba(139,92,246,0.12)50%,transparent 70%);
+  animation:orbReveal 1.5s ease 1s forwards,drift4 30s ease-in-out 2s infinite alternate;
+}
+
+@keyframes orbReveal{from{opacity:0;transform:scale(0.8);}to{opacity:1;transform:scale(1);}}
+@keyframes drift1{from{transform:translate(0,0)scale(1);}to{transform:translate(80px,60px)scale(1.10);}}
+@keyframes drift2{from{transform:translate(0,0)scale(1);}to{transform:translate(-60px,80px)scale(0.92);}}
+@keyframes drift3{from{transform:translate(0,0)scale(1);}to{transform:translate(50px,-70px)scale(1.08);}}
+@keyframes drift4{from{transform:translate(0,0)scale(1);}to{transform:translate(90px,-50px)scale(1.05);}}
+
+.aura-bg::after{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity:0.5;pointer-events:none;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   UTILITIES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.rel{position:relative;z-index:1;}
+.container{max-width:1160px;margin:0 auto;padding:0 2.5rem;}
+
+.eyebrow{
+  display:block;
+  font-family:var(--font-ui);
+  font-size:0.65rem;
+  font-weight:600;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--p600);
+}
+
+.rule{
+  width:36px;height:2.5px;
+  background:linear-gradient(90deg,var(--p500),var(--rose));
+  border-radius:2px;
+  margin:0.85rem 0;
+}
+.rule.c{margin:0.85rem auto;}
+
+.sec-h{
+  font-family: var(--font-display);
+  font-size:clamp(2.4rem,4.2vw,3.6rem);
+  font-weight:700;
+  line-height:1.12;
+  color:var(--ink);
+  letter-spacing:-0.01em;
+}
+.sec-h em{
+  font-style:italic;
+  font-weight:400;
+  color:var(--p600);
+}
+
+/* Glass card */
+.glass{
+  background:rgba(255,255,255,0.48);
+  backdrop-filter:blur(22px) saturate(1.6);
+  -webkit-backdrop-filter:blur(22px) saturate(1.6);
+  border:1px solid rgba(255,255,255,0.82);
+  border-radius:20px;
+  box-shadow:0 8px 48px rgba(107,53,200,0.10), inset 0 1.5px 0 rgba(255,255,255,0.95);
+}
+
+/* Scroll reveal */
+.reveal{
+  opacity:0;
+  transform:translateY(36px);
+  transition:opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+section{padding:7rem 0;position:relative;z-index:1;}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   NAVBAR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:999;
+  height:78px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 3rem;
+  transition:all 0.4s ease;
+}
+
+.nav.scrolled{
+  background:rgba(247,245,254,0.82);
+  backdrop-filter:blur(28px) saturate(1.7);
+  -webkit-backdrop-filter:blur(28px) saturate(1.7);
+  border-bottom:1px solid rgba(255,255,255,0.85);
+  box-shadow:0 2px 30px rgba(107,53,200,0.07);
+}
+
+.nav-logo{display:flex;flex-direction:column;gap:1px;}
+.nav-logo-name{
+  font-family:var(--font-display);
+  font-size:1.6rem;
+  font-weight:700;
+  color:var(--ink);
+  line-height:1;
+}
+.nav-logo-sub{
+  font-size:0.75rem;
+  font-weight:600;
+  letter-spacing:0.26em;
+  text-transform:uppercase;
+  color:var(--p500);
+}
+
+.nav-menu{display:flex;gap:3rem;list-style:none;}
+.nav-menu a{
+  font-size:1.1rem;
+  font-weight:600;
+  letter-spacing:0.08em;
+  color:var(--ink2);
+  text-decoration:none;
+  position:relative;
+  transition:color 0.2s;
+}
+.nav-menu a::after{
+  content:'';
+  position:absolute;
+  left:0;bottom:-3px;
+  width:0;height:1.5px;
+  background:linear-gradient(90deg,var(--p500),var(--rose));
+  border-radius:2px;
+  transition:width 0.3s;
+}
+.nav-menu a:hover{color:var(--p600);}
+.nav-menu a:hover::after{width:100%;}
+
+.nav-cta{
+  font-size:0.95rem;
+  font-weight:600;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:#fff;
+  background:linear-gradient(135deg,var(--p700),var(--p500));
+  padding:0.68rem 1.7rem;
+  border-radius:100px;
+  text-decoration:none;
+  box-shadow:0 4px 20px rgba(107,53,200,0.38);
+  transition:all 0.3s;
+}
+.nav-cta:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 28px rgba(107,53,200,0.52);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   HERO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.hero{
+  min-height:100vh;
+  height:auto;
+  display:flex;
+  align-items:flex-start;
+  padding:78px 0 0;
+  overflow:hidden;
+  position:relative;
+  isolation:isolate;
+}
+
+.hero::before{
+  content:'';
+  position:absolute;
+  inset:-10% -8% -8% -8%;
+  background:
+    radial-gradient(52% 46% at 16% 28%, rgba(232,121,249,0.14) 0%, rgba(232,121,249,0) 72%),
+    radial-gradient(46% 44% at 78% 12%, rgba(240,120,64,0.16) 0%, rgba(240,120,64,0) 70%),
+    radial-gradient(62% 58% at 52% 90%, rgba(139,92,246,0.12) 0%, rgba(139,92,246,0) 74%);
+  filter:blur(14px) saturate(108%);
+  opacity:0.9;
+  pointer-events:none;
+  z-index:0;
+}
+
+.hero::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(120deg, rgba(255,255,255,0.14), rgba(255,255,255,0) 35%),
+    repeating-linear-gradient(135deg, rgba(255,255,255,0.06) 0 2px, transparent 2px 18px);
+  mix-blend-mode:soft-light;
+  opacity:0.42;
+  pointer-events:none;
+  z-index:0;
+}
+
+.hero .container{
+  position:relative;
+  z-index:1;
+  max-width:100%;
+  width:100%;
+  padding:0;
+}
+
+
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.06fr 0.94fr;
+  gap:0;
+  align-items:stretch;
+  position:relative;
+  z-index:1;
+  min-height:640px;
+  width:100%;
+  border-radius:0;
+  overflow:hidden;
+  background:linear-gradient(112deg, rgba(255,255,255,0.96) 0%, rgba(251,247,255,0.93) 56%, rgba(77,35,145,0.92) 100%);
+  border-top:0;
+  border-bottom:1px solid rgba(255,255,255,0.75);
+  border-left:0;
+  border-right:0;
+  box-shadow:0 28px 76px rgba(52,28,96,0.25);
+}
+
+.hero-right-col{
+  position:relative;
+  overflow:hidden;
+  min-height:100%;
+  display:flex;
+  align-items:flex-end;
+}
+
+.hero-right-col::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  z-index:2;
+  background:
+    linear-gradient(240deg, rgba(47,20,90,0.18) 2%, rgba(47,20,90,0.62) 72%),
+    linear-gradient(0deg, rgba(36,18,70,0.74) 0%, rgba(36,18,70,0) 42%);
+  pointer-events:none;
+}
+
+.hero-right-col::after{
+  content:'';
+  position:absolute;
+  inset:auto -18% -38% auto;
+  width:72%;
+  aspect-ratio:1/1;
+  background:radial-gradient(circle, rgba(255,255,255,0.26) 0%, rgba(255,255,255,0) 70%);
+  filter:blur(12px);
+  z-index:2;
+  pointer-events:none;
+}
+
+.hero-portrait-col{
+  position:absolute;
+  inset:0;
+  z-index:1;
+}
+
+.hero-portrait-col .about-photo-wrap{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  margin:0;
+  overflow:hidden;
+  padding-top:0;
+}
+
+.hero-portrait-col .about-photo-wrap::before,
+.hero-portrait-col .about-photo-wrap::after{
+  display:none;
+}
+
+.hero-portrait-col .about-photo-img{
+  animation:heroPortraitPan 20s ease-in-out infinite;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:52% 16%;
+  border-radius:0;
+  transform-origin:52% 20%;
+  filter:brightness(0.94) contrast(1.08) saturate(1.06);
+}
+
+@keyframes heroPortraitPan{
+  0%,100%{transform:translate3d(0,0,0) scale(1.02);}
+  50%{transform:translate3d(-8px,-6px,0) scale(1.06);}
+}
+
+/* Left column — text content, flows above portrait */
+.hero-grid > div:first-child,
+.hero-left-col{
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  padding:3.4rem 3.1rem 3rem;
+  position:relative;
+  z-index:2;
+  max-width:none;
+  background:linear-gradient(140deg, rgba(255,255,255,0.97), rgba(249,244,255,0.95));
+}
+
+.hero-overlay-stack{
+  position:absolute;
+  left:5.5%;
+  right:5.5%;
+  bottom:1.1rem;
+  width:auto;
+  max-width:720px;
+  display:flex;
+  flex-direction:column;
+  gap:0.8rem;
+  z-index:3;
+}
+
+/* Credentials card — natural height, no forced grow */
+.hero-card{
+  flex:none;
+  padding:1.45rem 1.2rem;
+  position:relative;
+  overflow:hidden;
+  background:rgba(67,38,120,0.54);
+  border:1px solid rgba(255,255,255,0.32);
+  box-shadow:0 10px 38px rgba(10,4,22,0.35);
+  animation:fadeUp 1s ease 0.5s both;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   JAIN PRATIK LOGO — animated
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.jain-logo-wrap{
+  position:relative;
+  width:82px;
+  margin-bottom:1.2rem;
+  margin-top:0;
+  align-self:flex-start;
+  animation:fadeUp 1s ease 0.1s both;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:0.5rem;
+}
+
+.jain-img{
+  width:64px;
+  height:auto;
+  display:block;
+  position:relative;
+  z-index:2;
+  filter:
+    drop-shadow(0 0 8px rgba(240,120,64,0.55))
+    drop-shadow(0 0 20px rgba(139,92,246,0.25));
+  animation:jainFloat 5s ease-in-out infinite, jainGlow 4s ease-in-out infinite alternate;
+  mix-blend-mode:multiply;
+}
+
+.jain-om{
+  width:64px;
+  height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  z-index:2;
+  font-family:var(--font-ui);
+  font-size:2.4rem;
+  line-height:1;
+  background:linear-gradient(135deg,var(--gold),var(--coral),var(--rose));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  filter:
+    drop-shadow(0 0 8px rgba(240,120,64,0.5))
+    drop-shadow(0 0 18px rgba(139,92,246,0.25));
+  animation:jainFloat 5s ease-in-out infinite, jainGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes jainFloat{
+  0%,100%{transform:translateY(0);}
+  50%    {transform:translateY(-6px);}
+}
+
+@keyframes jainGlow{
+  0%  {filter:drop-shadow(0 0 10px rgba(240,120,64,0.45)) drop-shadow(0 0 22px rgba(139,92,246,0.20));}
+  100%{filter:drop-shadow(0 0 22px rgba(240,120,64,0.75)) drop-shadow(0 0 40px rgba(232,121,249,0.30));}
+}
+
+/* Soft aura rings behind logo */
+.jain-glow-ring{
+  position:absolute;
+  border-radius:50%;
+  border:1px solid;
+  pointer-events:none;
+  top:32px; left:32px;
+  transform:translate(-50%,-50%);
+}
+
+.jain-ring-1{
+  width:56px;height:56px;
+  border-color:rgba(240,120,64,0.35);
+  animation:jainRing 10s linear infinite;
+}
+.jain-ring-2{
+  width:78px;height:78px;
+  border-color:rgba(139,92,246,0.22);
+  border-style:dashed;
+  animation:jainRing 16s linear infinite reverse;
+}
+.jain-ring-3{
+  width:100px;height:100px;
+  border-color:rgba(232,121,249,0.14);
+  border-style:dotted;
+  animation:jainRing 24s linear infinite;
+}
+
+@keyframes jainRing{
+  from{transform:translate(-50%,-50%) rotate(0deg);}
+  to  {transform:translate(-50%,-50%) rotate(360deg);}
+}
+
+/* Sparkle particles */
+.jain-sparkle{
+  position:absolute;
+  width:3px;height:3px;border-radius:50%;
+  top:32px;left:32px;
+  pointer-events:none;
+  animation:jainSpark 3.8s ease-in-out infinite;
+}
+.jain-sparkle:nth-child(4){animation-delay:0s;   --sx:38px; --sy:-42px; background:rgba(240,120,64,0.9);}
+.jain-sparkle:nth-child(5){animation-delay:1s;   --sx:-40px;--sy:-28px; background:rgba(240,192,64,0.9);}
+.jain-sparkle:nth-child(6){animation-delay:2s;   --sx:42px; --sy:30px;  background:rgba(232,121,249,0.9);}
+.jain-sparkle:nth-child(7){animation-delay:2.9s; --sx:-34px;--sy:36px;  background:rgba(139,92,246,0.9);}
+
+@keyframes jainSpark{
+  0%  {transform:translate(-50%,-50%) scale(0);opacity:0;}
+  25% {transform:translate(calc(-50% + var(--sx)),calc(-50% + var(--sy))) scale(1.3);opacity:1;}
+  65% {transform:translate(calc(-50% + var(--sx)*1.5),calc(-50% + var(--sy)*1.5)) scale(0.5);opacity:0.3;}
+  100%{transform:translate(calc(-50% + var(--sx)*2),calc(-50% + var(--sy)*2)) scale(0);opacity:0;}
+}
+
+/* Sacred sutra text below logo */
+.jain-sutra{
+  font-family:var(--font-ui);
+  font-size:0.72rem;
+  font-weight:600;
+  color:var(--p600);
+  letter-spacing:0.02em;
+  line-height:1.4;
+  animation:fadeUp 1s ease 0.4s both;
+  white-space:nowrap;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   HERO YOUTUBE MINI-AD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.hero-yt-ad{
+  display:flex;align-items:center;gap:0.85rem;
+  padding:0.85rem 1.1rem 0.85rem 0.9rem;
+  background:rgba(255,255,255,0.50);
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,0.80);
+  border-radius:16px;
+  text-decoration:none;color:inherit;
+  margin-top:0;
+  box-shadow:0 4px 24px rgba(107,53,200,0.09);
+  transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  animation:fadeUp 1s ease 1.0s both;
+  width:100%;
+  flex-shrink:0;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero-yt-ad::before{
+  content:'';
+  position:absolute;inset:0;border-radius:14px;
+  background:linear-gradient(90deg,rgba(255,68,68,0.06),rgba(232,121,249,0.06));
+  opacity:0;transition:opacity 0.3s;
+}
+
+.hero-yt-ad:hover{
+  transform:translateY(-3px) scale(1.02);
+  box-shadow:0 10px 36px rgba(255,68,68,0.18);
+  border-color:rgba(255,100,100,0.35);
+}
+.hero-yt-ad:hover::before{opacity:1;}
+
+.hya-play{
+  width:36px;height:36px;border-radius:8px;
+  background:linear-gradient(135deg,#cc0000,#ff4444);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  box-shadow:0 3px 12px rgba(255,68,68,0.45);
+  animation:playGlow 2.5s ease-in-out infinite;
+}
+@keyframes playGlow{
+  0%,100%{box-shadow:0 3px 12px rgba(255,68,68,0.45);}
+  50%    {box-shadow:0 3px 20px rgba(255,68,68,0.75),0 0 0 4px rgba(255,68,68,0.12);}
+}
+.hya-tri{
+  width:0;height:0;
+  border-top:7px solid transparent;
+  border-bottom:7px solid transparent;
+  border-left:12px solid #fff;
+  margin-left:3px;
+}
+
+.hya-text{}
+.hya-top{
+  font-size:0.72rem;font-weight:600;
+  color:var(--ink);display:block;line-height:1.3;
+}
+.hya-sub{
+  font-size:0.6rem;color:var(--muted);
+  display:block;margin-top:0.08rem;
+}
+.hya-badge{
+  margin-left:auto;
+  font-size:0.55rem;font-weight:700;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:rgba(255,80,80,0.9);
+  border:1px solid rgba(255,80,80,0.25);
+  padding:0.22rem 0.55rem;border-radius:100px;
+  background:rgba(255,68,68,0.07);
+  display:flex;align-items:center;gap:0.3rem;
+  white-space:nowrap;
+}
+.hya-blink{
+  width:5px;height:5px;border-radius:50%;
+  background:#ff4444;
+  animation:liveBlink 1.5s ease-in-out infinite;
+}
+
+.hero-tag{
+  font-size:0.65rem;
+  font-weight:600;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--p600);
+  display:block;
+  margin-bottom:1rem;
+  animation:fadeUp 1s ease 0.2s both;
+}
+
+.hero-name{
+  font-family: var(--font-display);
+  font-size:clamp(4rem,7.5vw,7rem);
+  font-weight:700;
+  line-height:0.95;
+  color:var(--ink);
+  letter-spacing:-0.02em;
+  animation:fadeUp 1s ease 0.3s both;
+}
+
+.hero-name-italic{
+  display:block;
+  font-style:italic;
+  font-weight:300;
+  font-size:clamp(3.2rem,6vw,5.8rem);
+  background:linear-gradient(125deg,var(--p700) 0%,var(--p500) 40%,var(--rose) 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  line-height:1.05;
+}
+
+.hero-hindi{
+  font-family:var(--font-ui);
+  font-size:1.55rem;
+  font-weight:500;
+  color:var(--muted);
+  display:block;
+  margin:0.8rem 0 2rem;
+  animation:fadeUp 1s ease 0.5s both;
+  letter-spacing:0.04em;
+}
+
+.hero-desc{
+  font-family: var(--font-ui);
+  font-size:1.03rem;
+  line-height:1.58;
+  color:var(--ink2);
+  font-weight:300;
+  width:min(92%,620px);
+  max-width:620px;
+  margin-right:1.6rem;
+  text-align:left;
+  word-spacing:normal;
+  margin-bottom:2.4rem;
+  animation:fadeUp 1s ease 0.6s both;
+}
+
+.hero-desc strong{color:var(--p600);font-weight:600;}
+
+/* Stat strip */
+.stat-row{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:0.75rem;
+  margin-bottom:2.2rem;
+  animation:fadeUp 1s ease 0.75s both;
+}
+
+.stat-cell{
+  background:rgba(255,255,255,0.52);
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,0.84);
+  border-radius:14px;
+  box-shadow:0 4px 20px rgba(107,53,200,0.08), inset 0 1px 0 rgba(255,255,255,0.95);
+  padding:1.1rem 1.4rem;
+  text-align:center;
+  position:relative;
+}
+
+.stat-n{
+  font-family:var(--font-ui);
+  font-size:3rem;
+  font-weight:700;
+  display:block;
+  line-height:1;
+  letter-spacing:0.04em;
+  background:linear-gradient(135deg,var(--p700),var(--p400));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+.stat-l{
+  font-family:var(--font-ui);
+  font-size:0.62rem;
+  font-weight:500;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--muted);
+  display:block;
+  margin-top:0.3rem;
+}
+
+/* Buttons */
+.btn-row{display:flex;gap:1rem;animation:fadeUp 1s ease 0.9s both;}
+
+.btn-a{
+  font-size:0.74rem;
+  font-weight:600;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:#fff;
+  background:linear-gradient(135deg,var(--p700) 0%,var(--p500) 60%,var(--rose) 100%);
+  background-size:200%;
+  padding:0.9rem 2.2rem;
+  border-radius:100px;
+  text-decoration:none;
+  display:inline-block;
+  box-shadow:0 6px 24px rgba(107,53,200,0.42);
+  transition:all 0.35s;
+}
+.btn-a:hover{
+  background-position:100%;
+  transform:translateY(-3px);
+  box-shadow:0 14px 38px rgba(107,53,200,0.55);
+}
+
+.btn-b{
+  font-size:0.74rem;
+  font-weight:600;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--p700);
+  background:rgba(255,255,255,0.55);
+  backdrop-filter:blur(12px);
+  border:1.5px solid rgba(107,53,200,0.28);
+  padding:0.9rem 2.2rem;
+  border-radius:100px;
+  text-decoration:none;
+  display:inline-block;
+  transition:all 0.3s;
+}
+.btn-b:hover{
+  background:rgba(255,255,255,0.82);
+  border-color:var(--p500);
+  transform:translateY(-2px);
+}
+
+/* Inner mini-orbs on card */
+.hc-orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(50px);
+  pointer-events:none;
+}
+.hc-orb-1{
+  width:220px;height:220px;
+  top:-70px;right:-70px;
+  background:radial-gradient(circle,rgba(240,192,64,0.4)0%,transparent 70%);
+  animation:hcOrb1 8s ease-in-out infinite alternate;
+}
+.hc-orb-2{
+  width:180px;height:180px;
+  bottom:-50px;left:-40px;
+  background:radial-gradient(circle,rgba(139,92,246,0.35)0%,transparent 70%);
+  animation:hcOrb2 10s ease-in-out infinite alternate;
+}
+
+@keyframes hcOrb1{
+  from{transform:translate(0,0);}
+  to{transform:translate(-30px,20px);}
+}
+@keyframes hcOrb2{
+  from{transform:translate(0,0);}
+  to{transform:translate(25px,-20px);}
+}
+
+.cred-lbl{
+  font-size:0.6rem;
+  font-weight:600;
+  letter-spacing:0.28em;
+  text-transform:uppercase;
+  color:var(--p500);
+  display:block;
+  margin-bottom:0.9rem;
+}
+
+.cred-list{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:0.6rem;
+}
+
+.cred-item{
+  display:flex;align-items:flex-start;gap:0.9rem;
+  padding:0.78rem 0.85rem;
+  background:rgba(255,255,255,0.55);
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.9);
+  transition:all 0.25s;
+  min-height:100%;
+}
+.cred-item:hover{
+  background:rgba(255,255,255,0.8);
+  transform:translateY(-2px);
+}
+
+.cdot{
+  width:8px;height:8px;
+  border-radius:50%;
+  flex-shrink:0;
+  margin-top:4px;
+}
+.cdot-v{ background:var(--p500); box-shadow:0 0 8px rgba(139,92,246,0.7);}
+.cdot-g{ background:var(--gold);  box-shadow:0 0 8px rgba(240,192,64,0.7);}
+.cdot-c{ background:var(--coral); box-shadow:0 0 8px rgba(240,112,112,0.7);}
+.cdot-r{ background:var(--rose);  box-shadow:0 0 8px rgba(232,121,249,0.7);}
+.cdot-m{ background:#7fdcc8;      box-shadow:0 0 8px rgba(127,220,200,0.7);}
+
+.ci-title{
+  font-size:0.72rem;font-weight:600;
+  color:var(--ink);display:block;line-height:1.3;
+}
+.ci-sub{
+  font-size:0.63rem;color:var(--muted);
+  line-height:1.35;margin-top:0.1rem;display:block;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(28px);}
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MARQUEE STRIP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.marquee-strip{
+  position:relative;z-index:1;
+  padding:1rem 0;
+  background:rgba(255,255,255,0.38);
+  backdrop-filter:blur(18px);
+  border-top:1px solid rgba(255,255,255,0.75);
+  border-bottom:1px solid rgba(255,255,255,0.75);
+  overflow:hidden;
+}
+
+.mq{display:inline-flex;white-space:nowrap;animation:mq 32s linear infinite;}
+
+.mq-i{
+  font-size:0.68rem;font-weight:500;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--ink2);padding:0 2.5rem;
+}
+
+.mq-sep{
+  display:inline-flex;align-items:center;
+  width:6px;height:6px;border-radius:50%;
+  background:linear-gradient(135deg,var(--p400),var(--rose));
+  vertical-align:middle;opacity:0.7;
+}
+
+@keyframes mq{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ABOUT — Redesigned: Portrait + Story Cards
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#about{
+  background:var(--bg);
+  position:relative;
+  overflow:hidden;
+}
+
+/* Ambient blob behind section */
+#about::before{
+  content:'';
+  position:absolute;
+  top:-120px; left:-80px;
+  width:520px; height:520px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(139,92,246,0.08) 0%,transparent 70%);
+  pointer-events:none;
+}
+
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1.5fr;
+  gap:5rem;
+  align-items:start;
+}
+
+/* ── STICKY LEFT: Portrait + Quick Facts ── */
+.sticky-panel{
+  position:sticky;
+  top:90px;
+}
+
+/* Portrait frame */
+.about-photo-wrap{
+  position:relative;
+  width:100%;
+  margin-bottom:2.2rem;
+}
+
+/* Decorative background geometry */
+.about-photo-wrap::before{
+  content:'';
+  position:absolute;
+  top:18px; left:18px;
+  right:-18px; bottom:-18px;
+  border-radius:44% 56% 62% 38% / 42% 46% 54% 58%;
+  background:linear-gradient(135deg,
+    rgba(139,92,246,0.14) 0%,
+    rgba(240,192,64,0.10) 50%,
+    rgba(232,121,249,0.08) 100%);
+  z-index:0;
+  animation:aboutBgShape 12s ease-in-out infinite alternate;
+}
+@keyframes aboutBgShape{
+  from{border-radius:44% 56% 62% 38% / 42% 46% 54% 58%;}
+  to  {border-radius:60% 40% 38% 62% / 56% 38% 62% 44%;}
+}
+
+/* Second decorative ring */
+.about-photo-wrap::after{
+  content:'';
+  position:absolute;
+  top:-12px; left:-12px;
+  right:12px; bottom:12px;
+  border-radius:42% 58% 58% 42% / 48% 42% 58% 52%;
+  border:1.5px solid rgba(139,92,246,0.22);
+  z-index:0;
+  animation:aboutRing 18s linear infinite;
+}
+@keyframes aboutRing{
+  from{transform:rotate(0deg);}
+  to  {transform:rotate(360deg);}
+}
+
+.about-photo-img{
+  position:relative;
+  z-index:1;
+  width:100%;
+  height:auto;
+  display:block;
+  border-radius:44% 56% 52% 48% / 46% 44% 56% 54%;
+  filter:
+    brightness(1.04)
+    contrast(1.06)
+    saturate(1.1)
+    drop-shadow(0 18px 48px rgba(107,53,200,0.28))
+    drop-shadow(0 4px 12px rgba(0,0,0,0.18));
+  animation:aboutPhotoFloat 7s ease-in-out infinite;
+  transition:filter 0.5s;
+  /* dark bg removal via mix-blend */
+  mix-blend-mode:normal;
+}
+.about-photo-img:hover{
+  filter:
+    brightness(1.07)
+    contrast(1.08)
+    saturate(1.18)
+    drop-shadow(0 24px 64px rgba(107,53,200,0.38));
+}
+@keyframes aboutPhotoFloat{
+  0%,100%{transform:translateY(0) rotate(0deg);}
+  33%     {transform:translateY(-8px) rotate(0.4deg);}
+  66%     {transform:translateY(-4px) rotate(-0.3deg);}
+}
+
+/* Floating label badges on photo */
+.about-photo-badge{
+  position:absolute;
+  z-index:3;
+  background:rgba(255,255,255,0.90);
+  backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,0.95);
+  border-radius:100px;
+  padding:0.46rem 0.9rem;
+  font-size:0.72rem;
+  font-weight:600;
+  color:var(--p700);
+  white-space:nowrap;
+  box-shadow:0 4px 20px rgba(107,53,200,0.15);
+  animation:badgeFloat 5s ease-in-out infinite;
+}
+.about-photo-badge.b1{
+  top:12%; right:-18px;
+  animation-delay:0s;
+}
+.about-photo-badge.b2{
+  bottom:22%; left:-16px;
+  animation-delay:1.8s;
+  color:var(--p600);
+}
+.about-photo-badge.b3{
+  bottom:6%; right:8px;
+  animation-delay:3.2s;
+  color:var(--p800);
+}
+@keyframes badgeFloat{
+  0%,100%{transform:translateY(0);}
+  50%     {transform:translateY(-5px);}
+}
+
+/* Name under photo */
+.about-name-block{
+  text-align:center;
+  margin-bottom:1.8rem;
+}
+.about-name-block h3{
+  font-family:var(--font-display);
+  font-size:1.6rem;
+  font-weight:700;
+  color:var(--ink);
+  letter-spacing:-0.02em;
+  margin-bottom:0.18rem;
+}
+.about-name-block .sub{
+  font-size:0.78rem;
+  font-weight:500;
+  color:var(--muted);
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+}
+
+/* Credential pills */
+.cred-pills{
+  display:flex;
+  flex-direction:column;
+  gap:0.55rem;
+}
+.cred-pill{
+  display:flex;
+  align-items:center;
+  gap:0.75rem;
+  padding:0.7rem 1.1rem;
+  background:rgba(255,255,255,0.55);
+  backdrop-filter:blur(14px);
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.90);
+  box-shadow:0 2px 12px rgba(107,53,200,0.06);
+  transition:all 0.28s cubic-bezier(.34,1.56,.64,1);
+  cursor:default;
+}
+.cred-pill:hover{
+  transform:translateX(6px) scale(1.01);
+  background:rgba(255,255,255,0.82);
+  box-shadow:0 6px 28px rgba(107,53,200,0.13);
+}
+.cred-pill-icon{
+  width:32px; height:32px;
+  border-radius:10px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1rem;
+  flex-shrink:0;
+}
+.cpi-v{background:linear-gradient(135deg,rgba(139,92,246,0.18),rgba(196,181,253,0.25));}
+.cpi-c{background:linear-gradient(135deg,rgba(240,192,64,0.18),rgba(240,192,64,0.30));}
+.cpi-g{background:linear-gradient(135deg,rgba(16,185,129,0.15),rgba(52,211,153,0.25));}
+.cpi-r{background:linear-gradient(135deg,rgba(232,121,249,0.15),rgba(232,121,249,0.25));}
+.cpi-m{background:linear-gradient(135deg,rgba(245,158,11,0.15),rgba(251,191,36,0.25));}
+
+.cred-pill-text{
+  display:flex; flex-direction:column; gap:0.1rem;
+}
+.cpt-title{font-size:0.80rem;font-weight:600;color:var(--ink2);line-height:1.3;}
+.cpt-sub{font-size:0.70rem;color:var(--muted);font-weight:400;line-height:1.3;}
+
+/* ── RIGHT: Story Cards ── */
+.about-story{
+  display:flex;
+  flex-direction:column;
+  gap:1.6rem;
+  padding-top:0.5rem;
+}
+
+.about-story-header{
+  margin-bottom:0.4rem;
+  text-align:left;
+}
+
+.story-card{
+  padding:1.8rem 2rem;
+  background:rgba(255,255,255,0.48);
+  backdrop-filter:blur(20px);
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,0.88);
+  box-shadow:0 4px 28px rgba(107,53,200,0.07);
+  transition:all 0.3s ease;
+  position:relative;
+  overflow:hidden;
+}
+.story-card::before{
+  content:'';
+  position:absolute;
+  top:0; left:0;
+  width:4px; height:100%;
+  background:linear-gradient(to bottom,var(--p400),var(--p600));
+  border-radius:4px 0 0 4px;
+  opacity:0;
+  transition:opacity 0.3s;
+}
+.story-card:hover::before{opacity:1;}
+.story-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 44px rgba(107,53,200,0.13);
+  background:rgba(255,255,255,0.68);
+}
+
+.story-card-icon{
+  font-size:1.4rem;
+  margin-bottom:0.7rem;
+  display:block;
+}
+.story-card-title{
+  font-family:var(--font-display);
+  font-size:1.15rem;
+  font-weight:600;
+  color:var(--ink);
+  margin-bottom:0.55rem;
+}
+.story-card p{
+  font-size:0.92rem;
+  line-height:1.85;
+  color:var(--ink2);
+  font-weight:300;
+}
+.story-card p strong{color:var(--p600);font-weight:600;}
+.story-card p em{color:var(--p500);font-style:italic;}
+
+/* Hindi quote card — special styling */
+.hindi-q{
+  padding:1.6rem 2rem;
+  background:linear-gradient(135deg,
+    rgba(139,92,246,0.08) 0%,
+    rgba(255,255,255,0.55) 100%);
+  backdrop-filter:blur(16px);
+  border-left:4px solid;
+  border-image:linear-gradient(to bottom,var(--p400),var(--gold)) 1;
+  border-radius:0 20px 20px 0;
+  font-family:var(--font-ui);
+  font-size:1rem;
+  line-height:2.1;
+  color:var(--ink2);
+  box-shadow:0 4px 24px rgba(107,53,200,0.08);
+  position:relative;
+}
+.hindi-q::before{
+  content:'"';
+  position:absolute;
+  top:-10px; left:1.5rem;
+  font-family:var(--font-display);
+  font-size:5rem;
+  color:rgba(139,92,246,0.12);
+  line-height:1;
+  pointer-events:none;
+}
+
+/* Stats strip inside about */
+.about-stat-row{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:0.75rem;
+  margin-top:0.4rem;
+}
+.about-stat{
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.88);
+  box-shadow:0 3px 16px rgba(107,53,200,0.06);
+  text-align:center;
+  padding:1.1rem 0.8rem;
+  background:rgba(255,255,255,0.46);
+  backdrop-filter:blur(12px);
+}
+.about-stat-n{
+  display:block;
+  font-family:var(--font-ui);
+  font-size:2rem;font-weight:700;
+  letter-spacing:0.04em;
+  background:linear-gradient(135deg,var(--p600),var(--p400));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.about-stat-l{
+  display:block;
+  font-size:0.68rem;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+  margin-top:0.15rem;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   4R FRAMEWORK — dark deep purple
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.fw-section{
+  background:var(--p900);
+  position:relative;
+  overflow:hidden;
+}
+
+/* Inner ambient orbs */
+.fw-amb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(100px);
+  pointer-events:none;
+}
+.fw-amb-1{
+  width:600px;height:600px;
+  top:-150px;left:-150px;
+  background:radial-gradient(circle,rgba(107,53,200,0.55)0%,transparent 70%);
+  animation:fwAmb 18s ease-in-out infinite alternate;
+}
+.fw-amb-2{
+  width:450px;height:450px;
+  bottom:-100px;right:-100px;
+  background:radial-gradient(circle,rgba(240,192,64,0.40)0%,transparent 70%);
+  animation:fwAmb 22s ease-in-out infinite alternate-reverse;
+}
+.fw-amb-3{
+  width:350px;height:350px;
+  top:40%;left:40%;
+  background:radial-gradient(circle,rgba(232,121,249,0.30)0%,transparent 70%);
+  animation:fwAmb 15s ease-in-out infinite alternate;
+}
+
+@keyframes fwAmb{
+  from{transform:translate(0,0) scale(1);}
+  to{transform:translate(60px,40px) scale(1.1);}
+}
+
+.fw-section .eyebrow{color:rgba(196,181,253,0.8);}
+.fw-section .rule{background:linear-gradient(90deg,var(--p300),var(--rose));}
+.fw-section .sec-h{color:#fff;}
+.fw-section .sec-h em{
+  background:linear-gradient(125deg,var(--p300),var(--gold));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+.fw-intro-text{
+  font-size:0.97rem;line-height:1.85;
+  color:rgba(255,255,255,0.52);max-width:420px;
+}
+
+.fw-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1.4rem;
+}
+
+.fw-card{
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:18px;
+  padding:2.2rem 1.8rem;
+  position:relative;
+  overflow:hidden;
+  transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  cursor:default;
+}
+
+/* Glow spot on each card */
+.fw-glow{
+  position:absolute;
+  width:140px;height:140px;
+  border-radius:50%;
+  filter:blur(40px);
+  opacity:0.55;
+  top:-30px;right:-30px;
+  pointer-events:none;
+  transition:opacity 0.4s;
+}
+
+.fw-card:hover{
+  background:rgba(255,255,255,0.10);
+  border-color:rgba(255,255,255,0.18);
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:0 24px 50px rgba(0,0,0,0.35);
+}
+.fw-card:hover .fw-glow{opacity:0.85;}
+
+.fw-num{
+  font-family:var(--font-display);
+  font-size:4rem;font-weight:900;
+  color:#fff;
+  position:absolute;top:1rem;right:1.2rem;
+  line-height:1;
+}
+
+.fw-bar{
+  width:28px;height:2px;
+  border-radius:2px;margin-bottom:1rem;
+}
+
+.fw-en{
+  font-family:var(--font-display);
+  font-size:1.6rem;font-weight:700;
+  color:#fff;display:block;line-height:1;
+  margin-bottom:0.2rem;
+}
+
+.fw-en-single-line{
+  font-size:1.35rem;
+  white-space:nowrap;
+}
+
+.fw-hi{
+  font-family:var(--font-ui);
+  font-size:0.95rem;
+  color:var(--gold);
+  display:block;margin-bottom:0.9rem;
+}
+
+.fw-desc{
+  font-size:0.84rem;line-height:1.75;
+  color:rgba(255,255,255,0.46);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   PHILOSOPHY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.phil-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4.5rem;
+  align-items:start;
+}
+
+.bq{
+  padding:2.4rem;
+  position:relative;
+  overflow:hidden;
+  margin-bottom:1.4rem;
+  transition:transform 0.3s, box-shadow 0.3s;
+}
+.bq:hover{
+  transform:translateY(-4px);
+  box-shadow:0 20px 50px rgba(107,53,200,0.14);
+}
+
+.bq-aura{
+  position:absolute;
+  width:180px;height:180px;border-radius:50%;
+  filter:blur(55px);opacity:0.2;
+  pointer-events:none;
+  top:-50px;right:-50px;
+  transition:opacity 0.4s;
+}
+.bq:hover .bq-aura{opacity:0.38;}
+
+.bq-mark{
+  font-family:var(--font-display);
+  font-size:5rem;line-height:0.8;
+  display:block;margin-bottom:0.4rem;
+  background:linear-gradient(135deg,var(--p400),var(--rose));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  opacity:0.35;
+}
+
+.bq-text{
+  font-family:var(--font-display);
+  font-size:1.7rem;font-weight:500;
+  color:var(--ink);display:block;
+  line-height:1.55;margin-bottom:0.55rem;
+}
+
+.bq-trans{
+  font-family:var(--font-display);
+  font-style:italic;font-size:1rem;
+  color:var(--muted);display:block;margin-bottom:0.4rem;
+}
+
+.bq-src{
+  font-size:0.6rem;font-weight:600;
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--p500);
+}
+
+.pillar-stack{display:flex;flex-direction:column;gap:1.5rem;}
+
+.pillar{
+  padding:1.8rem 1.8rem;
+  background:rgba(255,255,255,0.48);
+  backdrop-filter:blur(16px);
+  border-radius:14px;
+  border:none;
+  border-left:5px solid;
+  position:relative;
+  overflow:hidden;
+  transition:all 0.3s;
+}
+
+.pillar::before{
+  display:none;
+}
+.pillar-1{
+  border-left-color:var(--p500);
+}
+.pillar-2{
+  border-left-color:var(--gold);
+}
+.pillar-3{
+  border-left-color:var(--p500);
+}
+.pillar-1::before{background:none;}
+.pillar-2::before{background:none;}
+.pillar-3::before{background:none;}
+
+.pillar:hover{
+  background:rgba(255,255,255,0.7);
+  transform:translateX(6px);
+  box-shadow:0 8px 28px rgba(107,53,200,0.1);
+}
+
+.p-name{
+  font-size:0.7rem;font-weight:700;
+  letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--p600);margin-bottom:0.5rem;
+}
+.p-hi{
+  font-family:var(--font-display);
+  font-size:1.1rem;
+  color:var(--ink);
+  display:block;
+  margin-bottom:0.6rem;
+  font-weight:600;
+}
+.p-body{font-size:0.88rem;line-height:1.8;color:var(--muted);}
+
+/* Philosophy books subsection */
+.phil-books{
+  margin-top:3.3rem;
+  padding:1.8rem 2rem;
+  border-radius:20px;
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(145deg,var(--p900) 0%,#20084a 50%,var(--p900) 100%);
+  border:1px solid rgba(255,255,255,0.14);
+  box-shadow:0 14px 42px rgba(24,10,48,0.35);
+}
+
+.phil-books::before{
+  content:'';
+  position:absolute;
+  width:320px;
+  height:320px;
+  right:-90px;
+  top:-90px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(240,192,64,0.30) 0%,transparent 70%);
+  filter:blur(6px);
+  pointer-events:none;
+}
+
+.phil-books::after{
+  content:'';
+  position:absolute;
+  width:280px;
+  height:280px;
+  left:-70px;
+  bottom:-120px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(107,53,200,0.35) 0%,transparent 70%);
+  pointer-events:none;
+}
+
+.phil-books-head{
+  margin-bottom:1.35rem;
+  position:relative;
+  z-index:1;
+}
+
+.phil-books .eyebrow{color:rgba(196,181,253,0.78);}
+.phil-books .rule{background:linear-gradient(90deg,rgba(196,181,253,0.8),rgba(240,192,64,0.85));}
+
+.phil-books-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:1rem;
+  position:relative;
+  z-index:1;
+}
+
+.phil-book-card{
+  padding:1.15rem 1.2rem;
+  border-radius:12px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.18);
+  box-shadow:0 6px 20px rgba(0,0,0,0.24);
+  position:relative;
+  overflow:hidden;
+  transition:all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+.phil-book-card::before{
+  content:'';
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:3px;
+  background:linear-gradient(180deg,var(--gold),var(--rose));
+}
+
+.phil-book-card:hover{
+  background:rgba(255,255,255,0.14);
+  transform:translateY(-4px);
+  box-shadow:0 12px 30px rgba(0,0,0,0.33);
+  border-color:rgba(255,255,255,0.28);
+}
+
+.phil-book-title{
+  display:block;
+  font-family:var(--font-display);
+  font-size:1.15rem;
+  font-weight:700;
+  color:#fff;
+  line-height:1.2;
+  margin-bottom:0.22rem;
+}
+
+.phil-book-sub{
+  display:block;
+  font-size:0.63rem;
+  font-weight:700;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:rgba(240,192,64,0.86);
+  margin-bottom:0.45rem;
+}
+
+.phil-book-desc{
+  font-size:0.86rem;
+  line-height:1.68;
+  color:rgba(255,255,255,0.64);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SERVICES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#services{
+  background:var(--bg);
+  position:relative;
+  overflow:hidden;
+}
+
+#services .container{position:relative;z-index:1;}
+#services .eyebrow{color:var(--p600);}
+#services .rule{background:linear-gradient(90deg,rgba(196,181,253,0.86),rgba(240,192,64,0.82));}
+#services .sec-h{color:var(--ink);}
+#services .sec-h em{color:var(--p600);}
+
+.svc-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:2rem;
+}
+
+.courses-list{
+  display:flex;
+  flex-direction:column;
+  gap:0.9rem;
+  flex:1;
+  position:relative;
+  z-index:1;
+}
+
+.course-item{
+  display:flex;
+  align-items:flex-start;
+  gap:0.9rem;
+}
+
+a.course-item{
+  text-decoration:none;
+  border-radius:10px;
+  padding:0.2rem 0.25rem;
+  margin:-0.2rem -0.25rem;
+  transition:background 0.25s ease;
+}
+
+a.course-item:hover{
+  background:rgba(255,255,255,0.08);
+}
+
+.course-num{
+  font-family:var(--font-ui);
+  font-size:0.85rem;
+  font-weight:700;
+  color:#fff;
+  background:linear-gradient(135deg,var(--p600),var(--p400));
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+}
+
+.course-content{
+  display:flex;
+  flex-direction:column;
+  gap:0.2rem;
+}
+
+.course-name{
+  font-size:0.82rem;
+  font-weight:600;
+  color:#fff;
+  display:block;
+}
+
+.course-level{
+  font-size:0.7rem;
+  color:rgba(255,255,255,0.54);
+  display:block;
+  font-weight:400;
+}
+
+.svc-card{
+  padding:2.8rem 2.4rem;
+  position:relative;
+  overflow:hidden;
+  transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  background:linear-gradient(135deg,#2d1a5a 0%,#4a2d7f 50%,#3d2570 100%);
+  border-radius:24px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.15);
+  min-height:260px;
+  display:flex;
+  flex-direction:column;
+}
+
+.svc-card::before{
+  content:'';
+  position:absolute;
+  width:280px;
+  height:280px;
+  right:-60px;
+  top:-80px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(240,192,64,0.35) 0%,rgba(240,192,64,0.08) 50%,transparent 70%);
+  filter:blur(30px);
+  pointer-events:none;
+  z-index:0;
+}
+
+.svc-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 16px 48px rgba(0,0,0,0.25);
+}
+
+.svc-card-bg{
+  display:none;
+}
+
+.svc-card::after{
+  display:none;
+}
+
+.svc-num{
+  font-family:var(--font-display);
+  font-size:3.8rem;
+  font-weight:700;
+  letter-spacing:0.04em;
+  display:block;
+  line-height:1;
+  margin-bottom:0.5rem;
+  color:#fff;
+  position:relative;
+  z-index:1;
+}
+
+.svc-title{
+  font-family:var(--font-display);
+  font-size:1.3rem;
+  font-weight:700;
+  color:var(--gold);
+  margin-bottom:1rem;
+  position:relative;
+  z-index:1;
+}
+
+.svc-hi{
+  display:none;
+}
+
+.svc-body{
+  font-size:0.92rem;
+  line-height:1.72;
+  color:rgba(255,255,255,0.56);
+  font-weight:300;
+  margin:0;
+  flex:1;
+  position:relative;
+  z-index:1;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BOOK — deep dark
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.book-section{
+  background:linear-gradient(145deg,var(--p900) 0%,#20084a 50%,var(--p900) 100%);
+  position:relative;overflow:hidden;
+}
+
+.bk-amb{
+  position:absolute;border-radius:50%;
+  filter:blur(95px);pointer-events:none;
+}
+.bk-amb-1{
+  width:500px;height:500px;top:-100px;right:-80px;
+  background:radial-gradient(circle,rgba(240,192,64,0.38)0%,transparent 70%);
+  animation:bkAmb 20s ease-in-out infinite alternate;
+}
+.bk-amb-2{
+  width:400px;height:400px;bottom:-80px;left:-60px;
+  background:radial-gradient(circle,rgba(107,53,200,0.45)0%,transparent 70%);
+  animation:bkAmb 26s ease-in-out infinite alternate-reverse;
+}
+.bk-amb-3{
+  width:300px;height:300px;top:35%;left:30%;
+  background:radial-gradient(circle,rgba(232,121,249,0.28)0%,transparent 70%);
+  animation:bkAmb 18s ease-in-out infinite alternate;
+}
+
+@keyframes bkAmb{
+  from{transform:translate(0,0);}
+  to{transform:translate(50px,40px);}
+}
+
+.book-grid{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:5rem;
+  align-items:center;
+  position:relative;z-index:1;
+}
+
+.book-cover{
+  width:200px;height:280px;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:6px;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:2rem 1.5rem;text-align:center;
+  position:relative;overflow:hidden;
+  box-shadow:14px 14px 0 rgba(0,0,0,0.28),22px 22px 0 rgba(0,0,0,0.14);
+  transition:transform 0.4s, box-shadow 0.4s;
+}
+
+.book-cover:hover{
+  transform:rotate(-2deg) translateY(-6px);
+  box-shadow:18px 18px 0 rgba(0,0,0,0.32),28px 28px 0 rgba(0,0,0,0.16);
+}
+
+.bc-glow{
+  position:absolute;inset:0;
+  background:radial-gradient(circle at 30% 25%,rgba(240,192,64,0.25)0%,transparent 65%);
+}
+
+.bc-om{
+  font-family:var(--font-ui);
+  font-size:2.2rem;display:block;
+  margin-bottom:0.8rem;
+  background:linear-gradient(135deg,var(--gold),var(--coral));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  filter:drop-shadow(0 0 12px rgba(240,192,64,0.6));
+  position:relative;
+}
+
+.bc-title{
+  font-family:var(--font-ui);
+  font-size:0.82rem;color:rgba(255,255,255,0.72);
+  line-height:1.8;position:relative;
+}
+
+.bc-badge{
+  margin-top:1.1rem;
+  font-size:0.55rem;font-weight:700;
+  letter-spacing:0.16em;text-transform:uppercase;
+  color:rgba(240,192,64,0.85);
+  border:1px solid rgba(240,192,64,0.3);
+  padding:0.3rem 0.8rem;border-radius:100px;
+  position:relative;
+}
+
+.book-section .eyebrow{color:rgba(196,181,253,0.75);}
+.book-section .rule{background:linear-gradient(90deg,rgba(196,181,253,0.8),rgba(240,192,64,0.8));}
+
+.bk-h{
+  font-family:var(--font-display);
+  font-size:2rem;font-weight:500;
+  color:#fff;line-height:1.35;margin-bottom:1.1rem;
+}
+
+.bk-body{
+  font-size:0.97rem;line-height:1.9;
+  color:rgba(255,255,255,0.52);margin-bottom:1.8rem;
+}
+.bk-body strong{color:rgba(196,181,253,0.9);}
+
+.tag-row{display:flex;flex-wrap:wrap;gap:0.5rem;}
+
+.tag-pill{
+  font-size:0.6rem;font-weight:600;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:rgba(196,181,253,0.8);
+  border:1px solid rgba(196,181,253,0.2);
+  padding:0.38rem 0.9rem;border-radius:100px;
+  background:rgba(107,53,200,0.14);
+  transition:all 0.25s;
+}
+.tag-pill:hover{
+  background:rgba(107,53,200,0.28);
+  border-color:rgba(196,181,253,0.4);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   YOUTUBE SECTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.yt-section{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(145deg,var(--p900) 0%,#1a082e 40%,#0f0520 100%);
+}
+
+/* ambient orbs inside */
+.yt-amb{position:absolute;border-radius:50%;filter:blur(95px);pointer-events:none;}
+.yt-amb-1{width:550px;height:550px;top:-120px;left:-120px;
+  background:radial-gradient(circle,rgba(255,0,0,0.22)0%,rgba(139,92,246,0.25)50%,transparent 70%);
+  animation:ytAmb1 20s ease-in-out infinite alternate;}
+.yt-amb-2{width:450px;height:450px;bottom:-100px;right:-80px;
+  background:radial-gradient(circle,rgba(240,192,64,0.28)0%,rgba(232,121,249,0.15)50%,transparent 70%);
+  animation:ytAmb2 25s ease-in-out infinite alternate;}
+.yt-amb-3{width:300px;height:300px;top:40%;right:25%;
+  background:radial-gradient(circle,rgba(255,80,80,0.18)0%,transparent 70%);
+  animation:ytAmb3 18s ease-in-out infinite alternate;}
+
+@keyframes ytAmb1{from{transform:translate(0,0)scale(1);}to{transform:translate(70px,50px)scale(1.12);}}
+@keyframes ytAmb2{from{transform:translate(0,0)scale(1);}to{transform:translate(-50px,-60px)scale(0.92);}}
+@keyframes ytAmb3{from{transform:translate(0,0);}to{transform:translate(40px,-30px);}  }
+
+.yt-inner{
+  position:relative;z-index:1;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:5rem;
+  align-items:center;
+}
+
+/* Left — text content */
+.yt-eyebrow{
+  font-size:0.62rem;font-weight:600;
+  letter-spacing:0.3em;text-transform:uppercase;
+  color:rgba(255,100,100,0.9);display:block;
+  margin-bottom:0.6rem;
+}
+.yt-eyebrow-dot{
+  display:inline-block;width:8px;height:8px;
+  border-radius:50%;background:#ff4444;
+  margin-right:0.5rem;
+  box-shadow:0 0 10px rgba(255,68,68,0.9);
+  animation:liveBlink 1.5s ease-in-out infinite;
+}
+@keyframes liveBlink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+
+.yt-rule{width:36px;height:2.5px;border-radius:2px;
+  background:linear-gradient(90deg,#ff4444,var(--rose));margin:0.85rem 0;}
+
+.yt-heading{
+  font-family:var(--font-display);
+  font-size:clamp(2rem,3.5vw,3rem);
+  font-weight:700;line-height:1.18;
+  color:#fff;margin-bottom:1.2rem;
+}
+.yt-heading em{
+  font-style:italic;font-weight:400;
+  background:linear-gradient(125deg,#ff6b6b,var(--rose),var(--p300));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+.yt-desc{
+  font-size:1rem;line-height:1.88;
+  color:rgba(255,255,255,0.55);
+  font-weight:300;margin-bottom:2rem;
+}
+.yt-desc strong{color:rgba(255,255,255,0.85);font-weight:600;}
+
+/* Channel stats */
+.yt-stats{
+  display:flex;gap:1.5rem;
+  margin-bottom:2rem;
+  flex-wrap:wrap;
+}
+.yt-stat{
+  padding:1rem 1.4rem;
+  background:rgba(255,255,255,0.06);
+  backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,0.10);
+  border-radius:14px;
+  text-align:center;
+  transition:all 0.3s;
+}
+.yt-stat:hover{background:rgba(255,255,255,0.12);transform:translateY(-3px);}
+.yt-stat-n{
+  font-family:var(--font-display);
+  font-size:1.8rem;font-weight:700;
+  display:block;line-height:1;
+  background:linear-gradient(135deg,#ff6b6b,var(--rose));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.yt-stat-l{
+  font-size:0.6rem;font-weight:500;letter-spacing:0.08em;
+  color:rgba(255,255,255,0.45);display:block;margin-top:0.25rem;
+}
+
+/* Topics list */
+.yt-topics{
+  display:flex;flex-wrap:wrap;gap:0.5rem;
+  margin-bottom:2.2rem;
+}
+.yt-topic{
+  font-size:0.68rem;font-weight:500;
+  letter-spacing:0.06em;
+  color:rgba(196,181,253,0.8);
+  border:1px solid rgba(196,181,253,0.2);
+  padding:0.4rem 1rem;border-radius:100px;
+  background:rgba(139,92,246,0.12);
+  transition:all 0.25s;
+}
+.yt-topic:hover{background:rgba(139,92,246,0.26);border-color:rgba(196,181,253,0.45);}
+
+/* Subscribe button */
+.yt-btn{
+  display:inline-flex;align-items:center;gap:0.7rem;
+  font-size:0.8rem;font-weight:700;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:#fff;text-decoration:none;
+  background:linear-gradient(135deg,#cc0000,#ff4444);
+  padding:0.95rem 2.2rem;
+  border-radius:100px;
+  box-shadow:0 6px 28px rgba(255,68,68,0.50);
+  transition:all 0.35s;
+  position:relative;overflow:hidden;
+}
+.yt-btn::before{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,#ff4444,#ff8888);
+  opacity:0;transition:opacity 0.35s;
+}
+.yt-btn:hover{transform:translateY(-3px);box-shadow:0 14px 38px rgba(255,68,68,0.65);}
+.yt-btn:hover::before{opacity:1;}
+.yt-btn-icon{position:relative;z-index:1;font-size:1.1rem;}
+.yt-btn-text{position:relative;z-index:1;}
+
+/* Right — channel card */
+.yt-card{
+  background:rgba(255,255,255,0.06);
+  backdrop-filter:blur(24px)saturate(1.4);
+  border:1px solid rgba(255,255,255,0.10);
+  border-radius:24px;
+  overflow:hidden;
+  transition:all 0.4s;
+  box-shadow:0 20px 60px rgba(0,0,0,0.35);
+}
+.yt-card:hover{
+  transform:translateY(-6px) scale(1.01);
+  box-shadow:0 30px 80px rgba(0,0,0,0.45),0 0 0 1px rgba(255,100,100,0.2);
+}
+
+/* Fake video thumbnail area */
+.yt-thumb{
+  width:100%;
+  aspect-ratio:16/9;
+  background:linear-gradient(135deg,#1a082e 0%,#2b1060 50%,#1a0533 100%);
+  position:relative;
+  overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* Glowing orbs inside thumbnail */
+.yt-thumb::before{
+  content:'';position:absolute;
+  width:280px;height:280px;border-radius:50%;
+  filter:blur(60px);opacity:0.45;
+  background:radial-gradient(circle,rgba(139,92,246,0.8)0%,transparent 70%);
+  top:-40px;left:-40px;
+  animation:thumbOrb1 8s ease-in-out infinite alternate;
+}
+.yt-thumb::after{
+  content:'';position:absolute;
+  width:220px;height:220px;border-radius:50%;
+  filter:blur(50px);opacity:0.40;
+  background:radial-gradient(circle,rgba(240,192,64,0.8)0%,transparent 70%);
+  bottom:-30px;right:-30px;
+  animation:thumbOrb2 10s ease-in-out infinite alternate;
+}
+@keyframes thumbOrb1{from{transform:translate(0,0);}to{transform:translate(40px,30px);}}
+@keyframes thumbOrb2{from{transform:translate(0,0);}to{transform:translate(-30px,-20px);}}
+
+.yt-play-wrap{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;
+  align-items:center;gap:1rem;
+}
+
+/* Animated play button */
+.yt-play{
+  width:72px;height:72px;border-radius:50%;
+  background:rgba(255,68,68,0.92);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 0 0 rgba(255,68,68,0.5);
+  animation:playPulse 2.5s ease-in-out infinite;
+  cursor:pointer;
+  transition:transform 0.2s;
+}
+.yt-play:hover{transform:scale(1.1);}
+.yt-play-tri{
+  width:0;height:0;
+  border-top:14px solid transparent;
+  border-bottom:14px solid transparent;
+  border-left:24px solid #fff;
+  margin-left:5px;
+}
+@keyframes playPulse{
+  0%{box-shadow:0 0 0 0 rgba(255,68,68,0.6);}
+  70%{box-shadow:0 0 0 20px rgba(255,68,68,0);}
+  100%{box-shadow:0 0 0 0 rgba(255,68,68,0);}
+}
+
+.yt-thumb-label{
+  font-family:var(--font-display);
+  font-style:italic;
+  font-size:1rem;color:rgba(255,255,255,0.7);
+  text-align:center;
+  position:relative;z-index:2;
+}
+
+/* Channel info bar */
+.yt-channel-bar{
+  padding:1.4rem 1.8rem;
+  display:flex;align-items:center;gap:1rem;
+  border-top:1px solid rgba(255,255,255,0.08);
+}
+
+.yt-avatar{
+  width:46px;height:46px;border-radius:50%;
+  background:linear-gradient(135deg,var(--p600),var(--rose));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-ui);
+  font-size:1.2rem;color:#fff;
+  flex-shrink:0;
+  box-shadow:0 0 0 2px rgba(255,255,255,0.15);
+}
+
+.yt-ch-name{
+  font-size:0.88rem;font-weight:600;
+  color:#fff;display:block;line-height:1.2;
+}
+.yt-ch-handle{
+  font-size:0.7rem;color:rgba(255,255,255,0.45);
+  display:block;margin-top:0.15rem;
+}
+
+.yt-live-badge{
+  margin-left:auto;
+  display:flex;align-items:center;gap:0.4rem;
+  background:rgba(255,68,68,0.18);
+  border:1px solid rgba(255,68,68,0.35);
+  border-radius:100px;
+  padding:0.3rem 0.75rem;
+}
+.yt-live-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:#ff4444;
+  box-shadow:0 0 6px rgba(255,68,68,0.9);
+  animation:liveBlink 1.5s ease-in-out infinite;
+}
+.yt-live-text{
+  font-size:0.6rem;font-weight:700;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:rgba(255,120,120,0.9);
+}
+
+/* Session items inside card */
+.yt-sessions{
+  padding:0 1.8rem 1.8rem;
+  display:flex;flex-direction:column;gap:0.7rem;
+}
+.yt-sess{
+  display:flex;align-items:center;gap:0.85rem;
+  padding:0.85rem 1rem;
+  background:rgba(255,255,255,0.05);
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.07);
+  transition:all 0.25s;
+  text-decoration:none;
+  color:inherit;
+}
+.yt-sess:hover{background:rgba(255,255,255,0.10);transform:translateX(4px);}
+.yt-sess-icon{font-size:1rem;width:32px;text-align:center;flex-shrink:0;}
+.yt-sess-title{font-size:0.78rem;font-weight:500;color:rgba(255,255,255,0.78);display:block;line-height:1.3;}
+.yt-sess-tag{font-size:0.62rem;color:rgba(196,181,253,0.6);display:block;margin-top:0.1rem;}
+.yt-sess-arrow{margin-left:auto;color:rgba(255,255,255,0.25);font-size:0.75rem;}
+
+@media(max-width:960px){
+  .yt-inner{grid-template-columns:1fr;gap:3rem;}
+  .yt-stats{gap:1rem;}
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CONTACT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.contact-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:5rem;
+  align-items:start;
+}
+
+.contact-body{
+  font-size:0.98rem;line-height:1.88;
+  color:var(--muted);margin:1.1rem 0 1.8rem;
+  font-weight:300;
+}
+
+.c-hindi{
+  padding:1.4rem 1.6rem;
+  background:rgba(255,255,255,0.44);
+  backdrop-filter:blur(16px);
+  border-left:3px solid var(--gold);
+  border-radius:0 12px 12px 0;
+  font-family:var(--font-ui);
+  font-size:0.97rem;line-height:2.1;
+  color:var(--ink2);
+}
+
+.c-list{display:flex;flex-direction:column;gap:1rem;}
+
+.c-link{
+  display:flex;align-items:center;gap:1.1rem;
+  padding:1.35rem 1.5rem;
+  background:rgba(255,255,255,0.48);
+  backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,0.80);
+  border-radius:14px;
+  text-decoration:none;color:inherit;
+  transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow:0 3px 18px rgba(107,53,200,0.06);
+}
+.c-link:hover{
+  background:rgba(255,255,255,0.74);
+  transform:translateX(6px) scale(1.01);
+  box-shadow:0 10px 32px rgba(107,53,200,0.14);
+}
+
+.c-icon{
+  width:44px;height:44px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;flex-shrink:0;
+}
+.ci-v{background:linear-gradient(135deg,var(--p700),var(--p400));box-shadow:0 4px 14px rgba(107,53,200,0.4);}
+.ci-g{background:linear-gradient(135deg,#c9960a,var(--gold));box-shadow:0 4px 14px rgba(240,192,64,0.4);}
+.ci-c{background:linear-gradient(135deg,var(--coral),#f5a090);box-shadow:0 4px 14px rgba(240,112,112,0.4);}
+.ci-r{background:linear-gradient(135deg,var(--rose),#f0a8f8);box-shadow:0 4px 14px rgba(232,121,249,0.4);}
+
+.c-lbl{
+  font-size:0.6rem;font-weight:700;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--p500);display:block;margin-bottom:0.2rem;
+}
+.c-val{
+  font-family:var(--font-display);
+  font-size:1rem;font-weight:600;color:var(--ink);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FOOTER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+footer{
+  background:var(--p900);
+  padding:2.2rem 0;
+  position:relative;z-index:1;
+}
+
+.foot-inner{
+  display:flex;align-items:center;
+  justify-content:space-between;
+}
+
+.foot-name{
+  font-family:var(--font-display);
+  font-size:1.1rem;font-weight:600;
+  color:rgba(255,255,255,0.5);
+}
+
+.foot-om{
+  font-family:var(--font-ui);
+  font-size:1.4rem;
+  background:linear-gradient(135deg,var(--p400),var(--gold),var(--rose));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  filter:drop-shadow(0 0 10px rgba(139,92,246,0.5));
+  animation:omPulse 4s ease-in-out infinite;
+}
+
+@keyframes omPulse{
+  0%,100%{filter:drop-shadow(0 0 6px rgba(139,92,246,0.4));}
+  50%{filter:drop-shadow(0 0 18px rgba(139,92,246,0.8));}
+}
+
+@keyframes liveBlink{
+  0%,100%{opacity:1;}
+  50%{opacity:0.25;}
+}
+
+.foot-copy{
+  font-size:0.6rem;font-weight:500;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:rgba(255,255,255,0.22);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SECTION GLOW DIVIDER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.glow-div{
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--p400),var(--rose),transparent);
+  opacity:0.35;
+  position:relative;z-index:1;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   RESPONSIVE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@media(max-width:960px){
+  .nav{padding:0 1.5rem;}
+  .nav-menu{display:none;}
+  .hero-grid,.about-grid,.phil-grid,.contact-grid,.book-grid{grid-template-columns:1fr;gap:3rem;}
+  .hero .container{padding:0;}
+  .hero-grid{gap:0;min-height:auto;border-radius:0;}
+  .hero-grid > div:first-child,.hero-left-col{justify-content:flex-start;padding:2.4rem 1.5rem 2rem;}
+  .hero-desc{width:100%;max-width:100%;margin-right:0;text-align:left;}
+  .hero-right-col{min-height:470px;}
+  .hero-overlay-stack{position:relative;right:auto;bottom:auto;width:100%;padding:0 1rem 1rem;}
+  .hero-portrait-col .about-photo-wrap{width:100%;height:100%;}
+  .stat-row,.about-stat-row{grid-template-columns:1fr;}
+  .svc-grid{grid-template-columns:1fr;}
+  .fw-grid{grid-template-columns:1fr 1fr;}
+  .svc-grid{grid-template-columns:1fr;}
+  .book-cover{margin:0 auto;}
+  .foot-inner{flex-direction:column;gap:1rem;text-align:center;}
+  .container{padding:0 1.5rem;}
+  .sticky-panel{position:static;}
+  .hero{min-height:100vh;height:auto;padding:78px 0 0;}
+  .phil-books{padding:1.25rem;}
+  .phil-books-grid{grid-template-columns:1fr;}
+  section{padding:5rem 0;}
+  .fw-grid{grid-template-columns:1fr 1fr;}
+}
+
+@media(max-width:640px){
+  .svc-card{
+    padding:1.6rem 1.2rem;
+    min-height:auto;
+  }
+  .svc-num{
+    font-size:2.5rem;
+  }
+  .svc-title{
+    font-size:1.08rem;
+    margin-bottom:0.75rem;
+  }
+  .svc-body{
+    font-size:0.86rem;
+    line-height:1.65;
+  }
+  .courses-list{
+    gap:0.65rem;
+  }
+  .course-item{
+    gap:0.65rem;
+  }
+  .course-num{
+    width:24px;
+    height:24px;
+    font-size:0.75rem;
+  }
+  .course-name{
+    font-size:0.78rem;
+  }
+  .course-level{
+    font-size:0.68rem;
+    line-height:1.45;
+  }
+  .fw-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<!-- AURA BG -->
+<div class="aura-bg" aria-hidden="true">
+  <canvas id="spiritual-canvas"></canvas>
+  <div class="aura-orb aura-orb-1"></div>
+  <div class="aura-orb aura-orb-2"></div>
+  <div class="aura-orb aura-orb-3"></div>
+  <div class="aura-orb aura-orb-4"></div>
+</div>
+
+<div class="rel">
+
+<!-- NAV -->
+<nav class="nav" id="navbar">
+  <div class="nav-logo">
+    <span class="nav-logo-name">M L Suriya</span>
+    <span class="nav-logo-sub">Peaceful Profit Monk</span>
+  </div>
+  <ul class="nav-menu">
+    <li><a href="#about">About</a></li>
+    <li><a href="#framework">4R</a></li>
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#youtube">YouTube</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="tel:+919427611171" class="nav-cta">Call Now</a>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="home">
+  <!-- Full-page portrait — stays behind all content -->
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-left-col">
+        <div class="jain-logo-wrap">
+          <div class="jain-glow-ring jain-ring-1"></div>
+          <div class="jain-glow-ring jain-ring-2"></div>
+          <div class="jain-glow-ring jain-ring-3"></div>
+          <div class="jain-om" aria-label="Om symbol">ॐ</div>
+          <div class="jain-sparkle"></div>
+          <div class="jain-sparkle"></div>
+          <div class="jain-sparkle"></div>
+          <div class="jain-sparkle"></div>
+        
+        </div>
+        <span class="hero-tag">Peaceful Profit Monk · ध्यान धन साधक</span>
+        <h1 class="hero-name">
+          Mishrilal
+          <span class="hero-name-italic">Suriya</span>
+        </h1>
+        <span class="hero-hindi">ध्यान · धन · साधना</span>
+        <p class="hero-desc">
+          For over <strong>30 years</strong>, guiding 300+ organisations to
+          double their profits — through peace, dharma &amp; the timeless
+          science of meditation. Govt. of India certified ZED Master Trainer.
+        </p>
+        <div class="stat-row">
+          <div class="stat-cell">
+            <span class="stat-n">30+</span>
+            <span class="stat-l">Years of Mastery</span>
+          </div>
+          <div class="stat-cell">
+            <span class="stat-n">300+</span>
+            <span class="stat-l">Organisations</span>
+          </div>
+          <div class="stat-cell">
+            <span class="stat-n">2×</span>
+            <span class="stat-l">Profit Growth</span>
+          </div>
+        </div>
+        <div class="btn-row">
+          <a href="#services" class="btn-a">Explore Services</a>
+          <a href="#contact" class="btn-b">Connect With Me</a>
+        </div>
+      </div>
+
+
+      <div class="hero-right-col">
+        <div class="hero-portrait-col" id="heroPortraitSlot"></div>
+        <div class="hero-overlay-stack">
+          <div class="glass hero-card">
+            <div class="hc-orb hc-orb-1"></div>
+            <div class="hc-orb hc-orb-2"></div>
+            <span class="cred-lbl">Credentials &amp; Expertise</span>
+            <div class="cred-list">
+              <div class="cred-item">
+                <div class="cdot cdot-v"></div>
+                <div>
+                  <span class="ci-title">QCI Certified — ZED Master Trainer</span>
+                  <span class="ci-sub">Quality Council of India · Govt. of India</span>
+                </div>
+              </div>
+              <div class="cred-item">
+                <div class="cdot cdot-c"></div>
+                <div>
+                  <span class="ci-title">Meditation Master Trainer</span>
+                  <span class="ci-sub">Daily Virtual Dhyan &amp; Swadhyaya Sessions</span>
+                </div>
+              </div>
+              <div class="cred-item">
+                <div class="cdot cdot-g"></div>
+                <div>
+                  <span class="ci-title">Managing Director</span>
+                  <span class="ci-sub">Here Quality Excellence Pvt. Ltd., Vadodara</span>
+                </div>
+              </div>
+              <div class="cred-item">
+                <div class="cdot cdot-r"></div>
+                <div>
+                  <span class="ci-title">Mechanical Engineer &amp; Author</span>
+                  <span class="ci-sub">Published by Government of India</span>
+                </div>
+              </div>
+              <div class="cred-item">
+                <div class="cdot cdot-m"></div>
+                <div>
+                  <span class="ci-title">Spiritual Mission · Since 2020</span>
+                  <span class="ci-sub">Vadodara, Gujarat, India</span>
+                </div>
+              </div>
+              <div class="cred-item">
+                <div class="cdot cdot-v"></div>
+                <div>
+                  <span class="ci-title">30+ Years of Mastery</span>
+                  <span class="ci-sub">Peace, Dharma &amp; Profit Growth</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- YouTube Mini Ad — below credentials card -->
+          <a href="https://www.youtube.com/@peacefulprofitmonk" target="_blank" class="hero-yt-ad">
+            <div class="hya-play"><div class="hya-tri"></div></div>
+            <div class="hya-text">
+              <span class="hya-top">Watch Daily Dhyan &amp; Swadhyaya Sessions</span>
+              <span class="hya-sub">@PeacefulProfitMonk · Free · Open to All</span>
+            </div>
+            <div class="hya-badge">
+              <span class="hya-blink"></span> Daily Live
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="mq">
+    <span class="mq-i">ZED Master Trainer</span><span class="mq-sep"></span>
+    <span class="mq-i">Dhyan Master</span><span class="mq-sep"></span>
+    <span class="mq-i">Peaceful Profit Monk</span><span class="mq-sep"></span>
+    <span class="mq-i">ध्यान धन साधक</span><span class="mq-sep"></span>
+    <span class="mq-i">300+ Organisations</span><span class="mq-sep"></span>
+    <span class="mq-i">Govt. of India Certified</span><span class="mq-sep"></span>
+    <span class="mq-i">Zero Waste · Zero Defect · Zero Mind</span><span class="mq-sep"></span>
+    <span class="mq-i">ZED Master Trainer</span><span class="mq-sep"></span>
+    <span class="mq-i">Dhyan Master</span><span class="mq-sep"></span>
+    <span class="mq-i">Peaceful Profit Monk</span><span class="mq-sep"></span>
+    <span class="mq-i">ध्यान धन साधक</span><span class="mq-sep"></span>
+    <span class="mq-i">300+ Organisations</span><span class="mq-sep"></span>
+    <span class="mq-i">Govt. of India Certified</span><span class="mq-sep"></span>
+    <span class="mq-i">Zero Waste · Zero Defect · Zero Mind</span><span class="mq-sep"></span>
+  </div>
+</div>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+
+      <!-- ── LEFT: Sticky Portrait Column ── -->
+      <div class="sticky-panel reveal">
+
+        <!-- Portrait with decorative frame -->
+        <div class="about-photo-wrap">
+          <img
+            src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAGaAZQDASIAAhEBAxEB/8QAHQABAAEFAQEBAAAAAAAAAAAAAAQCAwUGBwgBCf/EAE4QAAEDAgMEBAkKAwYEBQUAAAIAAQMEEgURIgYhMkIHEzFSCBQjQVFicXKSFTNhgYKRoaKywbHC8CQ0Q9HS4TVTc+IWFxhj8TdUdHXy/8QAGgEBAAMBAQEAAAAAAAAAAAAAAAIDBAEFBv/EACgRAQEAAgICAQQBBAMAAAAAAAACAxIEIgEyExEhMUJBFCNSYQVRcf/aAAwDAQACEQMRAD8A8ZIiICIiAiIgIiICIiAiIgIiICIiAiIgKrtRmd+xbrsts9EFOOIYi4M576eMn4m9OSDE4DsxXYnJE5CUEJ8JuK2fCdkKKGY46owkZ8rSKbJvuy/dZKorOrGwSkjHlESst+FRJKm8SISIhUdl8zK1WYRhMIGAYd5QZLL+T4bVdkqs6WKK4QiHSIjAI/pVcdTJIQStaPKY3fmUuOjjnnEeqG4+UR4f6H8yhSycNV6olDTxEdtslpFwgRavzavsrKzGUoQ3T9eAfNdbr/Vck1NJDUU5Rhy8vvLKRYZK8tzgLCXbn2Om6c4qQaOLCK+jqMPno4etLhIx/T/X2lhcV6O46usd8Lfqo7Owuxn+l1tsuBOMPXg2kX+veto2ZwqpOs8lcYylZaIqO1S5kxy8x4lRz0FdLSTgQygXYoq7X067LPLTfL1FTk1uTVGTfV/HJcW6uTuF8KvYltERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERARFKw+mOsrYaWPilMRFBsuxmD9ZL4/PEx264gJtz/T/strLvEXW+sX6R5hWWKniGkpaGhiL+zwCHBdqt1rFVgDJVWjHw26hK4S+JV1TTjxsdWeWlERIoxIdJK9heF1dTKEUURFfp0rcNkNiK3GCF8urj5827V23ZTYugw+IM4BeS1m7M96y5eTr6vSwcT/Jx3Z3o5xKaMSqYpNRcq6Rs70d0wSgUsRaR0kS6lR4fZaPVfCKytPQjbcUYiSyVkqnoTijG5/NsBh5g1o/lUdtio43diYTyzcN3pXU/FhaLhFRJKfmtFTmqS1hzCs2Cllp+rjy35fqzVsdjsSoYXmpykaoGRzd2fizH8PP+P0LrFKETSCJEPCsxS09Ndyq7HVMmeJedcWrpYMLq8GqsKirTnu605R5byIbfiXOsRwLBzpZKWaliikIc9TPn9Tr1Ht1stQ4lFcUYx3cwCuF7X4FW4ZO8dYImBbxmZ82+/LPNX70x1glxDaro5qaaI6zDJBqaeOK87BXPqiCSnlKKUCExXozCsQemrh6yCAizsyLJ8/N2rWPCC2ZoIqSj2owjJ4KsnCcc94S+ff2O3sV+Otnn5cXxuJoiKSkREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREFXnW4dFlKM20T1M0RHFTQkfZ2lws345/ZWnrqHRRS9XgNdWWjfPURQDzEQldpEUSidqbXHLJSUt0dHTeXiLWQ3lbcIjp5dI83Etg6PtnajaPE3nnYijbVMbtvM/Q612hjrcSrQhjA2InYBbL09jL0psPgMOAYFDCwj1tucrs3nWPLWsvWwY+z7g+DR0YCIBaI6dK2Ohp44guIRUQpRt8nbxK/T1Y2abRXnfs9WfXVmIWjYOW3vK4MkfKsSNQJcxauVSKeQmG0hJS1NWSzGzUo9RaWnSSsSTEw3aslQMhGPCVvurpqpsFu6qKesOPmIbS0qqQ89Ntqx5S6yElOa1NWy05x1tPaVpLWtrdlgxeglpTDrYy7N+9lLw+pstuu9ZbRhJ323WlctWPs8/L1eLdtcJqsExY6eqzds3YSduNmVuoilxPo+xjZ63rBMfGIri1XjwkP2dNq9J9M/R/BjWGS1VOOVRFnk7N2svPWDCWFYy9JiMDnE+bZO/mWierz8s7S83EJM7iTFuVtZrbKgfDdpsQo9JDFUGIuPY43blhVaxCIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgMu0bJwjT7EYf1Fwy6jMuW4rvzCNv2lxdl6ChgLD8EwnCpJOsi8XgntK3jMBG0eX1VHJ6rcPs3voY2cjLE2rZrzaMLxcuwi/yyz+vJdorJbAtG23hWldGhh4rH1YMAOLdr7y9L/Rvz+rJbRihcQ6i1LzctPawEMmZkA/ZV+Ni0+TL7Kx9C5HONveWx0tNfq4VmbJ6lLTS6brblNGEgHSWpSYQjiC0iIvsqgqiJytG1XSksyRZ965fY4ztt0r4UwvLbcPu3L7DWBw2ioJUj1URcIrHzUsrmRiP5lm+vjO7h1eqrZWncQ2iuzKOzXxv+bLSQrbtn5rKUZCuu4SWHqKa8dNpEKyGHtIwCOrhu4VrwsWf8NjqBGpw6UtOpedukvBYZJXNobCYrgNuzJu3/AD/p3XoylEXwuUY9WlcR6TYOe/MXdycc/N2LVTz3k/p7wgaTHKXEY2H+1w5nl6R3f5LmnMu59LtEdbsX17sBtRSMTHdl27v3ZcK86slhqdRERERERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERBUPEvRdaP/D6nKJr6WLQDeYAEM39D5iT5LzpzL0HiMhFJTgwOFtHDY1jdnVi+f155/Wo5PVfg9nYOjCQ55CJmyYWZm3btwrcKoSmktHyi0LosxbC8L2cKtxKvgid27DNmI/Y3a62WPaOee2XDMAxCpiItM1QA08VvqkWsvhWTJgqnrY88zLYKMIKMhukG/wBZXqjHKaHV4zGIrRpotocRKU6w6ak4rOpMpf1WrXcYwHHK8iCSuGwi/wCV/wB6lj4SNcyXSptscNKcYI6uO4u6StDtHR3gRSleWkVySk2JxQTcIa5yl817OI/fvUnGMJ2iwiiKoxW2KCIdMu8wLPcw5tvZ/a2SlXEqSedLr+G4qExnIJcJcyx9Xj8UEkgm4kQvll5vvXJ9mOkOGKKrgCm6+SmhOUiKey0B1vy79zOouH1eObWQBi+EU0ZU8tUdKV5W2EICREXeG0viuVc8Sltc6dXUpNuqaC+Q9I2adKx9L0mwSEMXVEMpcIrEYNsY85i1bXtNKWbWNELD+Oea3Tavo5wbZ16a6Uic42MgJmZs/rzWieNP7Mt8uttZKXbADs6zT3dS27BNoMLmtvqoIyy7CkZlyqloqWKpkYJQyc8m3/gy2Cho4pLPGxpKke7KAl+oSXfjiSsl07hgpxSUt0RCQW8QrknTfSeJyvK/+L2tludVnsvg+JYfUS4Rdg+KQRudLPQSnDrYdzOw7svqWiYDU7UbT7JY6WPYnJVy0cQVFH4xbcQDd14+vpt1FzCSu12jaWTfWuzStr4BLYjHqVo+sKWlfMnbhcCuzz7W4cvrXldeyMNp/lLDa4SjLysRxHcPqFd+X/TxLx9WBZVSg3KZMq5UZPysIiKSsREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQfW4l6aDDJsSxHDKeKVnlqI6SGLfnxRAIt/Bl5l869T7G1xRYTgWKkMcZxUoTRXDxGIXD+a1FkJfRhS0n/mJWlUW1VPh0ZS05E+82IrY3t4eHPIeXLdwsuiY5tpDJUWXMA5ZZ+ZlpezOHyYX4vidS2Q1NEFnmya8ib27nH7lDxmCWskkKlF48t4G7edVZclTT0MeOdWZxvbfDaGNrZRMn8zBvWrVO31VPOwi/iosbZkTZvb59y1/DdnpflaWXE6qOQxLhW4HhOGjAMhDE7v2mbZpOfVOuNtKPgu3FRTC9STSuJm9jnvZtS72G1ezeM9C1XTV9bTjU19LNTnDJINwGQkIl9DdhXebP6F5ymp4pqryVMUgCWnRpUrGqCpkwuLDIIyiPEqkKfSXeISIvV0iu1n2Q/pmzdHXRngFXQSYpDSm9LVSnLR9ewvIMTk9jvuyztydRyhqdh6+u2fjKPxUbKvDg4R13idv2hiFdn2RpYoMFip4BYIohYAZvNkK570y4TNU0MOJws/W0h3Hl29V2E345/U6y4stbteXjTr1alTbUYlDI0msXz5fOs30l7Y4ltXDS1L09nVQtEbQ7yd7t7vmsdX4NUSi3iRC4yRhKOb8bEsIL4hQVRRSUxHy23K2eSzf023ZgBqMehIZygq4+bUWsiWa2Y23mgm8WqDPV523fesnS+N1IXeI6R5iMl9mwGKr1SQUkB90uP4lXWWaX/01S3TBtoJGmGRpSbduMTfNZPBcOx7CdlA2npRinDDpa0ziIdVnjMvF9nl7pLXdnNl5Q6sbCycmbj8y77shBT1uAVFKURBDUvLdHl3yJ3b8y04snVg5M1s4jUQ0lTWVEeGhlAThUUzG2TiBDezE3ZdkTNn9D+leGa7/iFR/wBUv4r3dsrST02LVFHLJENPBRynEEV146Ctu72ofhXhTFYyixOpjLPNpS/irGXIhoiIrEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREFS9VbOYjTVPQxs/SQYfriiEZam3TpK4rfs3cNq8relenOhR48Q6MqGEycmGeQDD6RK5m+4mUclayv407X9HXpqOSpwPBxHq7vEIhtt5bQL+UVIHBYJKPqBASK3vLIDAMOG4dAJOTBRxCz5egGUWM+qK+WTqy7orz8uTs9vBhafjGyxyVA3QRaeYhtL/UXxJh2ywAD35ymz8rblvXjgS23dYXvCrNdVRQjcIy/pVe2rXqwpYLHBHeTAz5buxY3AKSnrNoDq5DdxoWKKEM+YuIvu3Kzj2NyVlZFh9MJXylbxLYMFwWGgpHenMzlds5fanyIfG3XBZY2gERG4iLiVjEaMKuEusYTbf9bKjCSEKUdWq1TJjGYuq0jeKT7O1PVzjD5qHDayXCp5xGGI/IERcvKN3vflWbkwvCq+LypRyesIKjaTZmkrcLO0ermsvE1oWD4liWHkMVURWcNylVIzibxDszQAWioPL2Pkp9LgeH0xjaJESsYKcdWAn15e7csuMQsFwkREo7Ss+Nk8Pw4WC6KLq35SW47Jh1MXVite2dmyARk1LcMNgETE4srCb+bNb8cvJ5PVy/HML8WxKrrjErAvD7NxW/mXhzp1wscL6Rq2OMhdpcpdLZM2e9fovtlhXjNNiAARExwdYGTecSu/b8V4A8Jqnlj6Q+tkFspKcbcvQ279lKfZmzzPxePLlCIitYRERAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBERBUvTXgtCx7I1BSfNxVRP9pwy/dl5m8y9G+CdUHJs/jNM7tbHKB/EOX8qry+rTxK7vRdU/VjS3ctNF+kVhpJr5yKQrhWQx+rCWIKmLJgkhG36NK1Lx4mK0l5+V9BxvVsw1IBHbq0+stX2mxf8AwhItXKKj4lig00BSyykIe8tTpcW8ZrutkC53+aDzN9KjOOqaMmWcbN08BQh4yJCMw6hIljH6TZ8KrzpMRgII33MbHm33K945PVH1sekCIogD+v6+Ilqs2DxVgQicEY1BiRCMvxfzF/WpaJxTPs86st16upYZtkEtOMkZicfpZ9yu1+3GG4bT+O4jXDHG3p3kfsbtXEG2TxEDIaXEfFY3btjmIbvq8yqodiimk/tdUM5FpIiIjtH1bub7XxJ8cpVky1LfQ6TcU2jrCamp/FaBnzzd8yJvp9C2O2kqaO4rdPEPq/6lq+BYLHRNHFJLEUefW572cXsbd9PnVmnlz8XETKCY5yuEz0+772m25Kx7epN1Ps2nC6w6CqDyhdSfBctvo8UGziEbR4rly2TF4zE4pyGKISIYpbuEuVZDZnFZTMqaQriDTpJU1j1a8Wecjs2y9aJ1HV95b/stUvJGUMr+UF931di45s7UyAXWjylqXVtmpBeZsnubJs3y9VacFPN5k9knbGcaWKmm53kZmb0s/avBvhj00dL0gUkUZZu1GzF9RkzL3dtXShXVlNTlK8TRsR6fub914D8MCS7pnrRE7o4ogAd/o7fxzV2P2Yctf2vHhxlERWsQiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIg+uvTHgV0zVDY2MzeQziz/MvNC9Z+BlGH/g3E5QbKTxrJ3+i1VZvRp4vju6ntLHFCMYxv5Ox2ZvtLTJLvGvWIVvW04gUETiWeWbbm9ZaPUeRIC6weHUsWR7uOmobZvVEcUAgZiT3fUy1nEsbiovmCEdFhEZkV9y7CeHw1tGMh5ETcOX0rCR7J0UtP1EtKBxv2elMdzM9ldzVV1c0pdowLq6WnnIyYs8xbPe63jBsF2ixUaVqPDgiE4+1y48id7vuybJVy7A0WFVXj+F09swmz73d2WwYDtFWYbZFIMkAiJCFilWTb1XTj1liQ2O2klppak4qXqoDMSYj1NYWT+b6HWVk2FxeHAXxA6iAXFmOxg9JZfw3rMjjQyUZwRYmVhXFvt5iIi5fWVVdjBS4X4jU4h1tIYCBAVttvdK0dSO/Hf8A2wGK7G4tTPUPJicGUcDy6hfW/d7Vy/HKzHKIhi8UKcStK0B1d74l1qomrq+o/skEhRd8x/m4rVOo9m4L/GawRllLVwqO2pknq4mNHtDVQDVlQyUxd2YrvyrofR9hNQQnVVFrETej0LcKjChMLpLbbe6mHlFHRBGIiN2nSq6vaVGOPjpOw0RGArrR60hXTdkT0RFq5VzSEx68BIhtEh5V0bZExaKIdWpaMCjlstj8wS4sVHwmVLoP1ri/0rwF4XEsU3TViDx9jRR3+9bvXtHpLxekwbakKiavpgJoG0ObMbW5vv8AT2r8++lrHP8AxH0g4rirPkE07uDZ9g+Zao/Pl5+e5qfHjw1FERWMgiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgqZd88F/bKjwiOqwSqqBhkqJWOIi7Ozz/guBv2q5TyHDKMgFYY7xdRqdkpup+/h+gMbR1eByy/KFNWkU5F5E77NI6dS1CqbOWWIi03alw7wdNtauj2sHCa2qM6etawbnzyPzf5fWu8Y5EQzNIG989XsbsVGXH1enxMtV+ULC8S6g/FJyKzhFZ3BZr5TiIR9VariERVAXBbGYq9s/iRNL5TiDSSx1L0duzeJocxK4hWHxKGpjvPq4yt74rOYbLFWU+rUQ8KmfJvWxiJfZ0qua1S9vVpcZyXkYUMAmXqaVIEJTG0gEbtIraxwITEfLlpX2HBwALpLpFPZLsxeHtKwCMg/l0/qWVjC/SQlw91SxpYBDQNvdV2OEWtkHm5VEYjEgFoCEVrlOVglL3eERWzYlHYV1um3huWtVFsh6R4uVTZ6pkMBAqmoES/MuobOxWVEQ90RJaHsnTk2chCNveW8UtTFR0FRXF81FERrRil5/Jt4f8KnayuxTpixaOGrMYKYmhAWLNtzb/xzXGifMnct6zm3mKFjW2OK4rm7+M1Ukn5s1gVteaIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgmYZWS4fXwVsBOMkJiYP7HzXs/AMWpdrNl6fFqR83McpW9Bt2rxIuy+DXte2F7QNgFdUMFHW8Bu3zZ5bvv7EqdlmK/jr6uxzB1BHGQ6blGtEK0SHhLitWex2nYnkjcSCQX3g7+Za15QJSEuXSsV4ns48u0t4wGXyQkJF3luVLMLxCRaVzXB6zq4CG64hWYocbICERkEbuLUs1Y+zTjpvEJjbaJaVWNQN9pCNq1P5XGO0its95XKrHhMRGCQYxH1k1T2bFJNGA3XiqYZRMhtuWnliJvxS26u6sphuJDFH1kpcPrKUz2VZq6pm0hg0QiPCtZBjmq949vo/ZZCurCqzuLgTCqYWkdy/h2K749mTbVtGDxjDAMfCI8SxnTDjnyL0UY1XidjvA8MWXeLS38VXDU9bP1Ucg2B/X2lzjw2qmqw/oywahhImirKtzmyfttbPL834K/Gx566vGhERG5P2uqERXsQiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiApNFJLBVRSwEQyCbWkyjLsHg2dGsu3G0vXVAf2CndnN386DvDVFRWbMYPiMg21ElHF1ufnK1mLP681j6gBlHrYx4eUV0rbbZpxwSYsPEi+TQASAf+VbaRfEuaDLaWnmVeWfjrV6WDtPjVTDuIZIy1CKqknKPUUZfZX0rRK4bVRUBnwkPu3KimuT5VJgtKOaxUfKsdtoiRfZVggJuLhVQtZw2/CobS72TYcSnu8lFb7yydDJLJrnO4i4RWEjbIbuZTqepz5SIh0qW0u67Nip3EdRW/EpQ1OkooyL1lghM7dR/lUylbynWcxeso7I/C2fA7Ii63SIiI6rVe8JfYsNq+g8pQi/tVEzzA+W/6f3WPwkzPEoImyJmNhtbnz7F2/EMOjk2b+TZha2QHidvaK0YHn8zrq/IwmICtfzdqtrfOmfYqt2N21rcPqIso7rwfPld9y0W1XMSlF9yXxAREQEREBERAREQEREBERAREQEREBERAREQEREBERAREQEREBEVVqClFlMKwXEsTqHgpKWUzZs8mB10nYzoM2px/DSq2p+rcTytPcg5ILE/YpQ4fWF2U0nwOvZey3gv0EYUVVVyk0g2nKNjfWy63/wCTmxYavkyDT6qtnFVIfJ4eINgOh3aTaHFI6eSlOKMg63MmyzZe5OijYXD9iNngo6SIWlJs5T87ra6DC6KjcfFYgBxbLNvQr1Y5NEdo6i0itOLFr7K6yMdgfVyY3V00g3BPBquHSQ/0S4P0o4K2zO1ksAM7UdR5WnLLzP2j9T5/U7elehMLhGLFIZB5hIP0/wClaH4UOFPNsG+KxRXzYbK02bNl5LsL8N/2Vm5ePZ6HEy6uL+MXCHCVyuCXqrAYZUC8AmD5iXB7Vlo6gWtHVb3l5VU9mZSSBVRxE5KqExMtPD7ql6WHhEVXslqi9UrtPaA6kLeSosK/jIu9pUPkT1SRn16VKKoyiGSQrSIrh1KLG0cMBGVtvvKfsVs3iG22MDTUvWDhsJM1bU27gbus/Zn9Cnix1kpVlyTjns6H0IYNNi2ISY5UxONDTu4QZt89J2O/us34v9DrruIHnW08GnTqtX3CqGjwnDYaSkiGGCALRFm7GZQaCTxmrKpd90j6PYy9fFGr53k5fkrZpnTL0T4Jt9TPJUQDHUbvKN27l4y6R/B82kwCGWrpYimDrHYBHe+S/RUeEvWUXEIaari6qpijlC660l3RVNPyUxPBcSw6rOmqKWQJA7WcHWM3r9NdouibZPFqyrnlw+Aaie4huFec+kfwaKiEYTwQikIje+52ZdrHTu8vKiLeNsejbaLZ2uqIZqIzCHiMWzFacVNOO8opG+m1VLFhERAREQEREBERAREQEREBERAREQEREBERARFMoaCrrZuqpIikL1UER1XGEh8AEXsZdX2G6FdptoPEal6MxppjycsvNd2r0j0c+DNhGGlVfK4jPfbZcKs8Qjs8T4XguI4kRNSUpm4duQu6z2BdHm0uK4rDh8eHyicnncV+hexvRJsrs3PMdNRx3SiIlqW20my+DU8wyR0MTG3Y9rJojs8Bf+njbH/7Ql0jYvwXjq8JiqMSMgnz3i7MvZY08Df4Y/CqshYbRH8q78cmzm+yPRHsrs9VBWU1DEUohbwLeaOipKKLqqaIYhLVaJKYT+6rQ7/sq6Z1Q2PsiIqPUXOVqkly+srczFdyq2UaWIQsMy7qiVj3zjGPIOpTZC6sbR1SlwsonVEIWycd2olZPsjSmE+rsl7paiFZXE6GnxWglo6qMZYZwIJQLscXHJ1iowuG23T3VkMBnaWk6u4iOF+qPP0t/tkq88tOCnmnbTojxTYspJaE5cTwcuw8tcP0P9H0rSspYxG3XF3hXt2QBNnCQGIS3b+xc32x6JMJxaoOtwk2w6pPeQM3k5va3m+peVlwbffw9bBy9fGtvNUNYUEvVkJae8SmR4mTlwkK2La3o8x3BKohqsKmkBn0TUwPJH+HD9awmFYFiWIz9Vh+E1dZJ2u0cbk2X0+hZKxW2TycWv5XY6spB4SIveWToqCpmnYY45JDPsABuJ/YzLdtiuiXH60458bkbDKVu2NjaSUv5R9u912LZzZjB8CBhw6jEZOeZxZzf2v2q3FxP8lGXmzPq5bsx0U1mISR1GOn4rTM/wAwL6z9voXZMIw2iwukCloKWKngF9zC272qQIFwkq+AdS2zEzPV5d5ar2QMeN2phgHMnkK36nUfD/ImNo2iWm3uqiaUaqtMmK4ItH2lfy+ytkzrH0YarsyGelR6gsl9jO8BLmVEm9QmXEaZrxG268OFW+MRuH4lIFWphyPTwkrZcYfHNm8IxilqIKykiLrwtJc22s8H7ZPEMCnpKGjjilLhIRXXicmJS430qOTHKyaeGOkHwacYoa+IMGEp43HMssmWtF4Ou2bDd4qS/Q4mE+MRzHTwoIRtpKKO33VRWNLd+V+MbBbR4diM1GeHzF1RW8K1ualngkMJYpBIdzs4r9ZKjZfA6szlloYiI9REQrmm0Pg+bJV8NUcVKwyyZ2vl2OqqlPZ+bqL010ieDFjOFUcUuEMU5keoRFcG2k2UxjA6yogrKSQOoOwtKik15FVkSpQEREBERAREQEREBERAREQbp0VbC4ht1tCOH0QOwD86WXYva3RN0G4Js2EEtXA0lSEbgeT7nWueBBseGEbKTY5URD4zWuzi7tvsb+nXo4RuqjtEtNq0xHj8+VVUowvC6HDqUKakpo4og7oqcK+L6Kk4qX3mX0eFfFx0VBOqif3VaJ9S7IEsLjldiNDMEtPRlVQ8zAWRt9XY6zC+EPeESb1lOdZU0wuH7S4dVuIdb1Mhf4crWF9zrJySyZiEdur8qj4lhVDWxWT0wyCSuQUoUsbRxXWg2W981LaTsuRjb76tyMrxP7qtSKyUVmNhY0we2DF6qG5/KWyt9Y2/yqu3XwiuedOe2WJbFYIGI4NS9fWzs8MTs24H7z+lK7SsmtXQ8d2qwjBs4qqoY6nLMII9R5ezzfWtI2g2s2lxAerweWiwwC4jIOtlL7WkR+ElyPYjHflCm8ckmKapmK+WQnuMz9Lv2/st1p6ryVxErsXFifG1PE5fMy3Wsp0ZzkN1ZidaU3MYy6ve/wC1Zqhr64IOqKrnkDlIpRuEeXUIrWIawTn02ks/h7lcJDarqxzU/hkxZ8uOm37N4nWNlDU1JTdy/wD1cQ/auW0R1AOI9YJRfp+Jath4RtGBWis3T1IWDHJb6pXLzc+HX1fRcTl/J9rZUiyWJx6v8VpJZO6Ny1et24pMF2opsHxSdggrWLxed33C4+Z/bmyyuLHHU1kVMOq89XujxKvHLXS9g8Dx0ETGNspNcftfesgIC2olQLZWiqyVzM+idhXcpcSuybxuG20lZuK23SqBMg1CNwF6yhq6uFp1fpVEnlNBDvXyaoiiiIpDGMR4iIlr9RtCVZUeLYPEVWXNMWmD4ub7KnM0hVMzIyuwuo9OE4QCM8gyS89oqqM8iUxOuVXao8Z3aVIFVVKa5G+lXxPTyqJIeQivsZqqpT2SpAjP5yMSZu8tL2z6ONm9pqCWnqKEBKR73LJs1uJPcKpE9SjqbPFXSr4MVbSPXYjgmZxM+cUWW/L2rzXtZs3iuzeKS4fidLJFKG7UK/WwmExtkESHukK410+9EmE7aYPV1cFOzVsYP1Ri2V72qrVOafm4iyOPYXVYPilRhtZEUc0B2kKxyisEREBERAREQEREBSsPgKqrYaYc7pDYdyirb+iPDixPpGwWmYHMPGwKRsuVi3qUj9EOjKhbBsAw+gjZm6uFtzvny71uwlbUW960lqhXUVZFyxDaP5VsfWC4Qzjdp4lumeqqk2/PmFXR4VChPMtPCpkfCo1KpcX1fLkJVrVBKkeIkkQWVioFlTNaxW6VcUcXzl1cqSgr5VQTK4S+ILGWS+Eyukyt2qxJb7Vr+3uFUuKYTENWDGMcu9n+nNv3WxqFjUXX4XUBa2bBf8O/9l1KfZ5xxLYjFNk8alejhlkw0tYGO/JnWWjrx8VG3itXeJqAa3BrHYWIg07svr/2XL8VpsAnCQ62OCnKnd+ucRysdvR9CuxcvWfpTNy+D4rt4YzZuLrpRIlutCGRDwrB7E7N1WMYRFi+D1YwUE9xUxVcREZiJW3EAkOnTdbcs/S7NbbQzv8A8Gr6cR/92A/5hVmTkw8meJdV1ZbxkY4tJfCSwlftEbYrTUwPnlIOb+3c/wDFYfa3GaijHxeannpauHjhkff7RLmb6VZ2Nw2fFp/G57rS5lK9fi2WcSL+bxNNT26wut2qx6aqkAXpY26qDfndkWblm2597vll5sl0voebFpaI4cWM5npcooJJH3kz+Z/Z+LOtkjwimCARGKO0Vk8Hpo6altjG27UvNmn0GTrKciqS1dUqMua1LPhX1NTJsMNX7O09ZWtVVMk04M26Ez0D7GZZOnpIIAGOKMREeURUi7lQmtL1U2r8OdUeYclEz1KXNwqLarsaKVTjzKV2CrFPwq+XCqa9k0ct5K5G4+srPn0q7zKXkSRe4U7FbjdfS3jxCqtU9nyacYwI+6KphAmgEDtK4dQqPM984ReteSuyH/yyFd1R2eMfDo6O4cIraXanDoGGKcnCoy7/APX8F5Vz3L9Qem/ZQNtejLEsKMBKoaNzgd27CbsX5i11PJSVctPLukiK0lnyTrS/HXVGREVaQiIgIiICIiD63au8+BlgRVvSOWJyRCcNJG7Nc3M+7/NcFXtrwRNnhwro4+UZImGerNzz8+Tbv81dinakaegcSpuupdIjdxJgcpTQS0st11ulZKnYZKXlUGneOGqHl1Etiteo5Sv1aSLiWVhLSsJVeRxEu6er4eJZSlPSKUrTBX1URvmqyVQtK4LKklUL+6grtHvKF2VhD3tSl8yhVTEEoSjw8K7LlJnKKt2r6PCvnYjoqCZXVRzcKCwSotHhLhIbVdtVOWSscVUP9yAe6K5/tbgGFz44z1UQzOcvXWZbna3J2f6M8lvcJ2DNEPLd+bhWqUb/ACztRLJqKIDGINPKPF+a77Khj69jlV6y3PZ/DY6TCqWlAbBijEN27lWaFhELRERFUiIgDCNulYLH8WeJnpqTfK/o8yyzNZaSqpwQ1HphoqXFWoQp8nrY5cndvPGV2bP7HEfZn9KyeyeD/JtAEAjw90Uw3BpIaWaurtRlr1ktgoXA6cCjIfsrT56zrPk4k7VvSiSLIP8AtVcbZAIqubiEe8qlyV2b8gtpTsFVCqeZFCrLSi+r4orFtVEJPwpaqKiUYYCOS20NSkrWJCzvHTpVsWu0qmnYuqYj4y1K6La1f6ofsvUraRVVQWQcQ/EkbEw8P5VHrDVc9qH2Her9qsUu+1SEr2FWWlUTSCAr7/hrF4rUFkMMT6j0t/BJnZKkmlcXKWcrrSLT/MrMxkZ6SFKhrKcYo7tIrH07TtPaV3wrqOzPYfqFwkESuG0l+ZPhA4CezvStjNE42gUzygzd0t7fxZfpnRvYY3Wrwz4eOEtSdJFJiQgzNV02r2ju/wAllzy0Q84IiKhaIiICIiAiIgy+yWFS45tHQ4VEJEdTKIdi/RvZjA48D2XoMOhBmGKIRzZ897drrx34IOzUmM9JYVzhdBRA7vu877mXuquisAY9OkVr40/sqyUv7M1HWUfVarg0qXVU2u4bVrmHzFQ17dyTc/tW4DbJFdpV9KmHxhrYI6h3HR+6mUcucYqziwD4qYFw2qLgsv8AZQEiuIR1alZr1clsEKv8yi0r6VIWanVBbhQW1KknVQoK7VZqAuiIe8rypk4UkWKMyOISLSrijx6Kgx4RPvKRau0gq9VU8qqJCRNZJlSqy38K+WqxxgNrcQ+SsPnqR4yB2i999zKro8oWhjCTzA2Ql6c1i+lbDqiuw3DWpbrmroxK3stK4d/2iFZytxOn2fwZnbi4IWftd1yu06eFWut7+WWx7Enibxen3yk33K3geEjEPjM5FeW/eo2ytHJNEOIVmoy9VNpcX6sCpaZxdybW7eZVRFVWkI3Wve2J24xsDgmoqZ7mt1kz/gyp6NsU8bwVoJHzlpn6rt7W7W/Dd9S1SuksE+LV6yxnR/jAYZtaFKZ2Q1Xkz38/L+OX1O69LPxpx4tfDNxOZXy9nZi1S+6ritx22iXeVy1ec9Kq7CKlVI4+oiqUVinz22rG4qTy1ENILtr1n7GWSkcQG+4VhMJbxqokri5+D6GU4QpkCtERSNtSrkbUqo2UtkV0twLFVT5z2rIzPkBcKxed9QpYyk6nHIRUhWY/Mr3Kq/5JR6g7IiWCw5/G8UkqN5RQ9nv+ZSNpqzxWjlLVw6RFWsKhOiwiMDy689c30m+8vx/DJXTOsor9ZJmdokSk0cXMVqh04FJLdqWWjjEBSiQrWIvdJeV/D+wh5tncExlhbOGQoSf3t/7L1LI+gy+yuOeF7hLYr0I1+QNdSkEzZt2Zbn/i6z5Z6rIrs/PBERY2kREQEREBEV2EOslEB5iyQe0PAWwMqfZGrxOeIfLz6Hy35M3+7r0NXMtL6AsGjwXo7w2gEWE3juPd533roFVCRRcq9DFPVmv2YespuspbhHUOq5ZbZ2u6+jAS4x0kokfDYSx9LMWH4lbcNkpd5XVKOzZa5gOIhK3hWAoS6uoli7pLJ4gBOHWiRW2rXqV5Y8WIJLtQruvVH9m44aegVN5VjMLe4VksyWbImtq4KpVUa4K1bL5tXCVEj6UkQ6zTZKPKSkxvmKpkDOIh0q1Qno6suINJLv6oJCpJXC4VSXCia12Eiq5UJEFiuiA4GEmZ7SE2z+gs/wBlz8HPavb8oI8yoMP0559r9hP8S6JUB1sJxFpu0rU9nKeHYrY2Wuq2FqqTJ9T8b+Zv4v8Aepbfb7flzJX7V+Gy43iYUUY0VK7Xu2/LkZavVahuuu71yw+H10lTK80zuZm+b+1ZjjDlW7HhnDP+3j58/wArWcSYri1LRIqKav2+w6jjchvmFs2bsFt5fgzro2KQ6i/0qD0bYZ4x0gHWk2mjpyNt3MehvwvWjPX9r6s3EmqzfR14RyHSq+VBHNVF3l4b6VT6yKpLUWqRZVL6vhPo5V1xitoJvJjRiWub9DcSkUcIw0wxjbaIrGUd9bXyVblnGOgMvR51mxG0FOus6qvZTzKq31VVahFkgi1R2xksZSvnUEptYelQ8NG4iJXz6ospHuX2R8hXwVHrpbIi4VD6dhruJuVdjlLSb3jHOU/s7m/M7LOzMLCKwmz7ddi1XVlykICs3IxSHaOoVYSrpeXSKkEWnlVMIWCNyx+KVogNoWqPsJEkvkC4eJav0sYW2M9GWOUTb3OlO1vYObfwZZ2ncnp9XfUw4mno5YDESvAgfd6RyUck9SfZ+TEgFHKUZdo7laWydJmFlgm3eM4U42tT1cgi30XZfstbXmtoiIgIiIC2Lo6wwsX21wrD2G5p6kBJvtLX12PwScCbGOlCGWQXeOijeofflvbs/ipTOw9vbJuNIAU3CACIittFrxWrUYFHNyrZKU/JjcvS9ZZqW5KYbiIVisUpL4LR4lsJBq5VbmpxMeEUmlbD4LWFNT+Kz/OiNqxdcxQV4EXetWQrKGWmqOvgHV3VE2gtmpxMdJWqcuUz+DnmKzAutf2dmGSnCXvCs4PzaoySsVEqh3CqbVX6FAfCVJMqkLiQWy7qjD5Ot+gx/MpJKzXR3RXhxDqXZQSBbSlqohMZIglG7Urq4mpVKqJUkuj4S5P0m4tNVY18m6hiomYSF/O5ZEz/AHO34rrJLkfSjTNDtN1gi/lohMsm+r9mWvia79mD/kPTqYCekFtdGIkC0/Z8LbblvGHx3iNorXleNi7MfXUxGBjp0rJ9H1E0VLVVbsz9dNYD+qLZfxuV2qpxGDSJetaszglMNNhsMIiTZBv9r7/3WLPl66vV4OLvsniip7FVcsT0xF9FLR7yLXz1fP3liNo6ooqZqeJ26yZ7Gb6FlScWG64VrNJIeI4odXIz9UOiHd5vOrIlTVMrg8IwU9g8qyGWlW49xcIq7yrlVtRL4rUxZKsjFrVFqD7q7jlFBrj4Uw8crlHrDzIR0qXRjaF3eWr9RP094Vg9pqoYaOUitERHzLKk60rbmSWaOKjiJ2kqZWizyz3cT/lF1DHJVM1swLBhjSP2m2b+1ZilAXuK4lEw2Dq6OKKPhAVNkKOGK4tNq7Qj4pWDDFaNyxFCBVk9xluVqomOun6uK4rln6OlGlpRLTdbxJ6i1DaJ2KXDuFQqN75TJTUol+evhhYP8k9NWIuzOw1QjUNu9P8AuzrjQ9q9WeH9gbhi+E49GGQSi8Juzedv/leUxXl1Ovlrn8PiIiikIiIPq9eeBHgTw7PYhjckRMVRI0MZZdoN2/i/4LyMAEZi3eX6I+D9s++AdFuE0px2SvF1su7fmW/L8clfgnakb/DeIXEZdSz2H6wFYSSHM7h/SslhJExWktjOyMglxCrI1Ihpk+IiU0d4LH4hT3XFHdcuTq5SRM4GF2laftRVjGXVxj9kVNqKispuECIVHklgrPnYxu91X451Qpe2DlIsO1DbaZCtujfSK1nZeKOGnIRttIyWxwlpVWVOUgVVzKkXVXMsy1SvnMq1RzKUq1vmSQcwtRVLohYYThLNSlnoLMPd8yyCw9aXi9XHU+bgf2LLiQvwkKU7KlfC4V9JEcWu1aB0sUzHNh1SOWWZxl+V2/gS6DzLVekWBpMICRu2KYS+/Mf5lfx67sfMnbD5ajgcOoNS3vDYrQENXwrVcHpxjAe8t6wmn0hbqWvk3rLzOFi2KiDrIwARIryWT7FXNCMYCPNzK3n3l5W2z3MeL431EuS5cTVClyo7FTLOEEJSG7MzNnm/oTUYraOodwChidusmLJ9/YDdqv0NNHTxCI8I8qwuDGdfVS4lKzs5vbEzt2A3Ys/dkK0a6zqgrvK7lVuSaRu6vhP7qtSFmXKkyBVEvql7oqzJKT8QiS+56SLSo1ytnVxYqgEyu8oKlw1kYA0RXWiPFao8hZd5Q5H1j3bhUql1nKg8oCL1VqI/2zaaLmGnAi+0WkVsFZVg1LZquWu7NG0+J11RytJZ8O7/AH+tRlym3lIFNT9YVtqwlZUVOIH1UQ2h3lJkeSvlGIRIYVmKOlgphtGMVCq1dR8Lw4aYBIx1e6qsYqBjp7BtG7SpNRNYKweIGU9UAcQ3Lk9hMwsNIkXMpkxC3dVunisEV8mU/wCXHD/DVwT5U6IDrI47jw+cJezfk+n914GZ1+o3SLhMeObDYphswX9bTlbn3rcx/ZfmJiFPJSVs1NINpxGQEywZ51poxeeqGiIqFwiIg2rouwV8f26wrDMswmqAYs3yyHPf+6/SjDoRp6WGAGbQDD6F4q8CzZ98S6RpsTPgw+By394tzfzfcvb0IariW7BPXZVkr9Vzq81ep2sIVazyTriuWjVUzEdto8SqtHmtUSnkz03ClV1g8Nyp1QXZo4jErv0rFYhSUoCUloj7qpkrpYx1LE1ldJPdp0+8r8eOnKpkMCcXpmt9L/qWcjcbR4lr+BbqMfa/6lnYS0ioUnKaPDxKoVHIyYeVVxvmIqnV1evXy5LlTcuahcgqkubiRdEPEg6yIhtVvBanrqVhkLWGklImHMS0rD08hUeMhd81ONv2v/50qz2lBsSpVXaPEqScbVWmoJYzaSFpsIqBtzdgu3N523rJkqKiLrIij8xCrJr6Ury49p+jVcPpSuAhG4j4dK3rDaYaaAbretWM2Zw4oKWKWUddo2istVVEVNTvLKdgCOpUZ83y+dfCfGwTinbytVh+Xt9VW+zi1KkTI/Klzb1TcuzOvhKqXPW0qn1kRdcVcX+lavt3VyShFhlKXzxXy7+T0e3PL6s1sNZNHT05zylbEAXGS0/C+sraw8QnuEpTuEbeEOUVbint9UKpncLhKKAI7RHSppBJdbcI/ZVqPTar2Yv3lKiXywh4pB+FWiu/5g/Cqy38yoJtRJLlLWWn50fhL/UrRMT8MsfxErhMrUnCSsdWahi5erLT3rVCmY7xHqyEruIR0qRUOTCo/Wk5iJXILGIGMERmXCA6lZ2SpMsNjEnbfrf6VH2rlcMNNtz3PZn7SUnZ8C6qKOO7u8Sn+qufy2+njjARtERVcxW8ysx6B4lbK5+JUarFuqMbCJYvDSGatMy5VMxQxCAtQ8PeVOz9OXUFKQ8XqqXq4yovlEoEktxW6VPkIWBYWomFj5fdUZdpKvvAhIR1Davze6f8GfA+ljG6W2wCneUGb0Fq/dfovTmRldyrxj4cWCPS7fUmKgGQVUNru3pb+mVHJn7fVZirs86oiLE0iIpdDTyVVXDTxi7nKYgKD2b4E2zg4f0eT43KHlcSqHyfLfYGlvzXr0PDq4lrfRzs+OAbEYXhYMLHBTAxO3f5vxzWyQgTGOpeljnWWSq7LxRi43KJIBNcpxcqtSBmrkVmlmKM9V3EsvG4zRau6sQURMSvUcthW3aVGpEisoQkHSPKsBiWHlCJW3fCtpzzHiG1QcUq4KaLrJCERXMdU5UsVhYFDSgJXXWrMQ3WMsZBKM8Yyx5WGN4+xZCnfQu06kieURcPCrsLlpHSo5NoK3mV2PcSrqRJXy5BVKrTVZ6UJ1SSZkpCjU483wrD45CRxEQ6bdVwrMZlp1KLWBeJDpVkeyFLmDVnjlEEj23jpP327VLLmFa7gkzUuIyUxaQmzy9q2Ie8o3OtJSKklUSpJRdSKWUIqO8yEWHvLXKiplxvEGCMbaKMvi9b/ZRcXnranFGwmFnaJwaUn+h//hbLS0AUFIEQiN/MozM4/wD1X98tf6Vj3UVVipXFgqtXdTluVmtqApaSSaV2tBs3/wBlzx2Gu7YVryzRYUBZFI7HLu83mb78n9ntV7C4bIhERFYbChkqa6Stm+ckfPfyj5mWzU4CA8q166zqrXxZfUT0rgjyOTErRT2lqL4lIkb9Kg1AauEl2SkgZhcVSTj6qsw8oqpddR6pxIeVY+qcgtIblkKh/VFQKjVp0qSFNex1irqylpRd7Xdzk+rs/dbjgdGNNEPpWs4SA1O0dRJb8xaH838y3anYWAV3J6oz7L/ahNxL6KtVBiAEWlVLGIxZ+uqBgHmWbo4upgEe6sVh4DNWlOXCKytRMIRcSjQj4hNZcI2rBk5STlxK/WVF5klHHmakJdPFpG1edfDpwkZdjaLE2Zrqedgz+h//AIXpeEBs5VyTwq8GDFuiPERFhcqduuDd6P6dZ8/onjfngiIsLW+suh+D9gR7Q9K+C0ojeEdQ05s7+YNX8q543avRngLYS1T0g1uJEDv4vS5Bu5nf/LNWY52pGntuELIOHTbaKoHiJS7NFtoq11epehsyLfNxILXErhAOolbESEhFSFckeYqx4uV2lSo9/MKrFkFoTIItXKtL6QKmp8XtiIrSW6VTWRl7q1TaSK+LUI6fVU8bmRLwC5sEoLtxNTRZ/CyzFOXCsZho9XRQBb2RB+lZCne63hXHUvVaylCosnCNqkCWnlVdJL48KE6+8q+EqRQTpchMqbVYHd/0qiTePKqyZfCb9KDXsWhkAxlitEw1AS2ChmGqpQnHmHUoldHmJcKhYFM9PVFRFbYW8Pf87f16FO52n6oyz+Y8OlWi4lVahKtJGhlpaWvOsqSEbYtJ/a4Vdwmukr4yqpGcAI36pnbkWqdIUhhBSShdaM2RZecez+OS23C4vF6CGLdmAZP7e1cuZ8dkMd7Vql+6Nq+Wr7ciqaFGm3lWpbW1vjNWGGRZkzZHL7fMy2LFKyKioJas+UdIrUsKikknKpmuKSUrnd28/n+pX4o/lVTJ4fT9WA6RWSFUwiIgq9ysqkFwfeX1Ny+ILZOrPbyq8St5jcuyKRiz1DarJcTq51uZGI91R5HXXUPEJrQWIqqoYKc5SLhBS8U5uHSuZ9KeNPTYJLTwlkcz9Vu7Wz3Kcyqps3Q5WniWD1GJTXN19XMY5t2B1hWflyXS4+EVznofpfE9lKWLUPEuiwlpUciUpBcKx+IER6BUuYyESUQRE5biXE0jDafqYLu8ouJVGQEOlSJpsorRWMkEjkIi4VEpH1ESy2Hw5CKg08Vx/wDas7SxZRClOSW5DyrV9vaEcR2axChKO8ZYDHLL1cltEm5YjEgvAxLhIbdKjU7SPy2xijkosVqqM2dnhmKN/qd2RbZ02YQWH9JmMQADsJTdY2Xrav3Rea2tFbtXsfwBsJeHA8XxUx+flCKMvduu/UK8cedfoT4J2Clg3RFhV4ZSVQvUm+XfLMfysytwTtSOT8O15aVSIL7G+YqseHhWtnRyBWyi4iuFXy4kINKlsijxmLcwqsZVakjtuVGplLUXpNYWrXNqrYYHLTpWyx/NrmPTNjfyfh0wx3XFpFThym50ZZwRFy9WOlS4dyg4e+dHTl/7Q/pU6ExbiXHUrrfJj7ykRkRDptUMuEbe8r8ZqNCbqcVSVypjfhTeq0nwh9ZLsuYUJlSSC6Lj6yFbq4VQL5cv5V91OgokDMSWGxSnkjMZYuMNQWrPC2lR64LgLSPwqc1/CK9Q1QVFKEgNxt2ehVdmkhWEwebxOvKjlu6qfUHvcwrNyGLCoVOtGzD4vRNXy00LtmzTxy5fQJZ/5t9a2C3IVj6O2Ss6zuCsgSryUlMqRL1VVcqVj8fr/E6XyX94PRGKT42SYbaCrevxJqQMuqhbfv4pPM3syf71Lo4RCMVBwyjcGZ33s/n+lZuEMg4Vr9Z1VPo7rlUqS4uVVb1AVcqpuVRK2TKQ+ScKjyPkr0jjbxKPMYqfh1ZjPUfuirUhCw6SVNw6+JWy4VAQ6ob4D91cm6T6UiKF3Fsmkb9TLr0w6Vy/plFocOE27XJsvbcrZVVLoWxkDU2FxB52Ft32VtcL6eVa5guiAB9VZ6n4eVRpKV+R9Kx9RNkdoq9VS5Coghef2lBNR1pmV1xKQJjbyqvqe7akdMTkXCgu0IZkswI2godDT2KUXzaro1R5i9YVjKwtKnTFqUKQM1JynknwgNhqqv6RZ6ul0icAXMwt25v/ALIu+bX4CNbigzMzvlEw/i/+aLN8bvzPzwwDD5MTxqkw+LedRKMQ7vTuX6c7IYfFhGAUWHxMzBTQDELewcl+dHQn/wDVLZ7/APOi/Uv0kp+RQweGjKzFPbYpQ71Fp+BSBWilclqWqpFFxQUQvyq1JFGpRcKsSKUuUtTOIREWlcW6QqGTE6iUpbuqEu8uy4h8wfurmW03zU3urThVZG2Yb/cKf/pD2e6shGyxmFf8Ppf+iH6VlYVBNWTE0f2hV/VcrE3B9oVWSCfCWa+lbbzK3T8KvScKpSUlxcy+Fdcq/QqOZdRU591XRHTyqlXOVcSFbmbMSVxUkgwWMUpWjLFpMCuElkKeqGqogn4XLSQqmu+bJQcD/u83vKdIMvhLZU5Sd4lMuUel/u4e6roqqk5VFKICVy1SQzxPFDqiHyQaIhu+IlmNoydsIqMndvrWNw35plbh8Ip1LHlp5VMEdPKrUKu/4anXkWy4lUqVUXMogqCfTzL6qJFIWpiHvCo8nCQ6Vcm8ysScSCzkIiXDxfyq0W8dKqLhFW+VEFubcPEuZ9NIOVDRj3qgA+9dLk4Vz3pi/uWFf/sIP1KcjfMJfQHurP0/mWu4b80C2Cl/mSiVRR5kVxXK9HTlbyr5H84pg/NqqvKaz4sQ91XYYeFSOVfRVdJKMrFRIarkUSo4mSUVmZxIlatVZcqpVjiBUQ3Su4ju91FKl43RVqvo/9k="
+            alt="Mishrilal Suriya — Peaceful Profit Monk"
+            class="about-photo-img"
+          />
+        </div>
+
+        <!-- Name block -->
+        <div class="about-name-block">
+          <h3>Mishrilal Suriya</h3>
+          <span class="sub">Peaceful Profit Monk · ध्यान धन साधक</span>
+        </div>
+
+        <!-- Credential pills -->
+        <div class="cred-pills">
+          <div class="cred-pill">
+            <div class="cred-pill-icon cpi-v">🏛️</div>
+            <div class="cred-pill-text">
+              <span class="cpt-title">ZED Master Trainer</span>
+              <span class="cpt-sub">QCI · Govt. of India Certified</span>
+            </div>
+          </div>
+          <div class="cred-pill">
+            <div class="cred-pill-icon cpi-c">🧘</div>
+            <div class="cred-pill-text">
+              <span class="cpt-title">Meditation Master Trainer</span>
+              <span class="cpt-sub">Daily Dhyan &amp; Swadhyaya Sessions</span>
+            </div>
+          </div>
+          <div class="cred-pill">
+            <div class="cred-pill-icon cpi-g">🏭</div>
+            <div class="cred-pill-text">
+              <span class="cpt-title">Managing Director</span>
+              <span class="cpt-sub">Here Quality Excellence · Vadodara</span>
+            </div>
+          </div>
+          <div class="cred-pill">
+            <div class="cred-pill-icon cpi-r">📖</div>
+            <div class="cred-pill-text">
+              <span class="cpt-title">Author &amp; Engineer</span>
+              <span class="cpt-sub">Published by Government of India</span>
+            </div>
+          </div>
+          <div class="cred-pill">
+            <div class="cred-pill-icon cpi-m">📍</div>
+            <div class="cred-pill-text">
+              <span class="cpt-title">Spiritual Mission since 2020</span>
+              <span class="cpt-sub">Vadodara, Gujarat, India</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── RIGHT: Story Cards ── -->
+      <div class="about-story reveal" style="transition-delay:0.15s">
+
+        <div class="about-story-header">
+          <span class="eyebrow">Who I Am</span>
+          <div class="rule"></div>
+          <h2 class="sec-h">Engineer.<br/><em>Meditator.</em><br/>Mentor.</h2>
+        </div>
+
+        <!-- Stats strip -->
+        <div class="about-stat-row glass">
+          <div class="about-stat">
+            <span class="about-stat-n">30+</span>
+            <span class="about-stat-l">Years of Mastery</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-n">300+</span>
+            <span class="about-stat-l">Organisations</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-n">2×</span>
+            <span class="about-stat-l">Profit Growth</span>
+          </div>
+        </div>
+
+        <!-- Story card 1 -->
+        <div class="story-card glass">
+          <span class="story-card-icon">🌟</span>
+          <div class="story-card-title">The Journey</div>
+          <p><strong>श्री मिश्री लाल जी सुरिया</strong> — the Peaceful Profit Monk and ध्यान-धन-साधक — is the Managing Director of Here Quality Excellence Pvt. Ltd., Vadodara. A Mechanical Engineer by education, he has devoted over three decades to guiding organisations toward excellence through Indian spiritual wisdom.</p>
+        </div>
+
+        <!-- Hindi quote -->
+        <div class="hindi-q">
+          गत 30 वर्षों से उन्होंने 300 से अधिक संगठनों की मदद करके उनके प्रॉफ़िट को दोगुना करने में मदद की है — वह भी शांतिपूर्वक, धर्म व आध्यात्मिकता के साथ।
+        </div>
+
+        <!-- Story card 2 -->
+        <div class="story-card glass">
+          <span class="story-card-icon">⚙️</span>
+          <div class="story-card-title">Precision Meets Spirituality</div>
+          <p>As a <strong>ZED Master Trainer certified by the Quality Council of India</strong> and a Master Trainer in Dhyan, he bridges engineering precision, quality management rigour, and the depth of Indian spiritual tradition into one unified practice.</p>
+        </div>
+
+        <!-- Story card 3 -->
+        <div class="story-card glass">
+          <span class="story-card-icon">🪷</span>
+          <div class="story-card-title">The 4R Framework &amp; Open Sessions</div>
+          <p>His daily virtual Swadhyaya and Dhyan sessions are open to all. Through listening and practice, anyone can access the <strong>4R Framework</strong> — Rupees (सम्पत्ति), Respect (सम्मान), Relations (सम्बन्ध), and Rest (समाधि).</p>
+        </div>
+
+        <!-- Story card 4 -->
+        <div class="story-card glass">
+          <span class="story-card-icon">☸️</span>
+          <div class="story-card-title">Holistic Vision</div>
+          <p>He places special emphasis on <strong>Holistic Vision (Samyak-Darshan)</strong> from Jainvani and the Gita's <em>"Samatvam Yoga Uchyate"</em> as the inner technology that makes all four R's naturally available.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-div"></div>
+
+<!-- ═══ 4R FRAMEWORK ═══ -->
+<section class="fw-section" id="framework">
+  <div class="fw-amb fw-amb-1"></div>
+  <div class="fw-amb fw-amb-2"></div>
+  <div class="fw-amb fw-amb-3"></div>
+  <div class="container rel">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:end;margin-bottom:3.5rem;">
+      <div class="reveal">
+        <span class="eyebrow">The Framework</span>
+        <div class="rule"></div>
+        <h2 class="sec-h">The <em>4R</em> Path<br/>to Fulfilment</h2>
+      </div>
+      <p class="fw-intro-text reveal" style="transition-delay:0.15s">Through Swadhyaya and Dhyan, these four dimensions of a flourishing life become naturally accessible to every sincere seeker.</p>
+    </div>
+    <div class="fw-grid">
+      <div class="fw-card reveal" style="transition-delay:0s">
+        <div class="fw-glow" style="background:radial-gradient(circle,rgba(240,192,64,0.9)0%,transparent 70%);"></div>
+        <div class="fw-num">1</div>
+        <div class="fw-bar" style="background:linear-gradient(90deg,#f0c040,#f5d27a);"></div>
+        <span class="fw-en">Rupees</span>
+        <span class="fw-hi">सम्पत्ति</span>
+        <p class="fw-desc">Lasting prosperity aligned with dharma and purposeful, ethical enterprise.</p>
+      </div>
+      <div class="fw-card reveal" style="transition-delay:0.1s">
+        <div class="fw-glow" style="background:radial-gradient(circle,rgba(139,92,246,0.9)0%,transparent 70%);"></div>
+        <div class="fw-num">2</div>
+        <div class="fw-bar" style="background:linear-gradient(90deg,var(--p400),var(--p300));"></div>
+        <span class="fw-en fw-en-single-line">Relation &amp; Respect</span>
+        <span class="fw-hi">सम्बन्ध और सम्मान</span>
+        <p class="fw-desc">Real harmony is seen at home: when a mother-in-law and her son's wife relate with empathy, dignity, and mutual respect.</p>
+      </div>
+      <div class="fw-card reveal" style="transition-delay:0.2s">
+        <div class="fw-glow" style="background:radial-gradient(circle,rgba(240,112,112,0.9)0%,transparent 70%);"></div>
+        <div class="fw-num">3</div>
+        <div class="fw-bar" style="background:linear-gradient(90deg,var(--coral),#f5a090);"></div>
+        <span class="fw-en">Rest</span>
+        <span class="fw-hi">आराम</span>
+        <p class="fw-desc">True rest is inner calm: a steady mind, balanced breath, and deep recovery amidst work, family, and responsibility.</p>
+      </div>
+      <div class="fw-card reveal" style="transition-delay:0.3s">
+        <div class="fw-glow" style="background:radial-gradient(circle,rgba(232,121,249,0.9)0%,transparent 70%);"></div>
+        <div class="fw-num">4</div>
+        <div class="fw-bar" style="background:linear-gradient(90deg,var(--rose),#f5a8f8);"></div>
+        <span class="fw-en">Reading</span>
+        <span class="fw-hi">पठन</span>
+        <p class="fw-desc">Reading sharpens judgment: when you practice the previous R's consistently, this R helps you generate more Rupees with clarity and discipline.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-div"></div>
+
+<!-- ═══ PHILOSOPHY ═══ -->
+<section id="philosophy">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:4rem;" class="reveal">
+      <span class="eyebrow">Core Philosophy</span>
+      <div class="rule c"></div>
+      <h2 class="sec-h">Where <em>Dharma</em> Meets Excellence</h2>
+    </div>
+    <div class="phil-grid">
+      <div>
+        <div class="glass bq reveal">
+          <div class="bq-aura" style="background:radial-gradient(circle,var(--p400)0%,transparent 70%);"></div>
+          <span class="bq-mark">"</span>
+          <span class="bq-text">समत्वं योग उच्यते</span>
+          <span class="bq-trans">"Equanimity is called Yoga."</span>
+          <span class="bq-src">— Bhagavad Gita</span>
+        </div>
+        <div class="glass bq reveal" style="transition-delay:0.15s">
+          <div class="bq-aura" style="background:radial-gradient(circle,var(--gold)0%,transparent 70%);top:auto;bottom:-40px;left:-40px;right:auto;"></div>
+          <span class="bq-mark">"</span>
+          <span class="bq-text">सम्यक्-दर्शन</span>
+          <span class="bq-trans">"Right Perception — seeing reality without distortion."</span>
+          <span class="bq-src">— Jainvani · Holistic Vision</span>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay:0.2s">
+        <span class="eyebrow">Three Foundations</span>
+        <div class="rule"></div>
+        <div class="pillar-stack">
+          <div class="pillar pillar-1">
+            <p class="p-name">Holistic Vision</p>
+            <span class="p-hi">सम्यक्-दर्शन</span>
+            <p class="p-body">The Jain principle of right perception — seeing reality as it is, enabling wise, ethical decisions in business and life.</p>
+          </div>
+          <div class="pillar pillar-2">
+            <p class="p-name">Zero Philosophy</p>
+            <span class="p-hi">शून्य दर्शन</span>
+            <p class="p-body">Zero Waste · Zero Defect · Zero Effect · Zero Mind — India's quality mission powered by ancient spiritual inner technology.</p>
+          </div>
+          <div class="pillar pillar-3">
+            <p class="p-name">Daily Practice</p>
+            <span class="p-hi">नित्य साधना</span>
+            <p class="p-body">Daily Swadhyaya and Dhyan sessions transform how individuals and businesses relate to work, wealth, and wellbeing.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phil-books reveal" style="transition-delay:0.28s">
+      <div class="phil-books-head">
+        <span class="eyebrow">Books Published</span>
+        <div class="rule"></div>
+      </div>
+      <div class="phil-books-grid">
+        <article class="phil-book-card">
+          <span class="phil-book-title">Zero Mind · Zero Waste · Zero Defect · Zero Effect</span>
+          <span class="phil-book-sub">Written for Government of India</span>
+          <p class="phil-book-desc">A framework that links ancient Indian spiritual wisdom with quality excellence, introducing Zero Mind as the inner base for external transformation.</p>
+        </article>
+        <article class="phil-book-card">
+          <span class="phil-book-title">Samyak Samadhan</span>
+          <span class="phil-book-sub">Author's Work</span>
+          <p class="phil-book-desc">Explores right understanding, inner resolution, and practical life clarity. The book guides readers toward balanced decisions, stronger relationships, and peaceful progress in daily life.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SERVICES ═══ -->
+<section id="services">
+  <div class="container">
+    <div style="margin-bottom:3.5rem;" class="reveal">
+      <span class="eyebrow">What I Offer</span>
+      <div class="rule"></div>
+      <h2 class="sec-h">Pathways to <em>Transformation</em></h2>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card reveal" style="transition-delay:0s">
+        <span class="svc-num">01</span>
+        <h3 class="svc-title">Technique of Stressfree</h3>
+        <p class="svc-body">Practical methods to reduce stress and build a calm, balanced mind in daily life.</p>
+      </div>
+      <div class="svc-card reveal" style="transition-delay:0.12s">
+        <span class="svc-num">02</span>
+        <h3 class="svc-title">Career Counselling</h3>
+        <p class="svc-body">Guidance to choose the right career path based on strengths, goals, and long-term growth.</p>
+      </div>
+      <div class="svc-card reveal" style="transition-delay:0.24s">
+        <span class="svc-num">03</span>
+        <h3 class="svc-title">Meditation Mastery</h3>
+        <p class="svc-body">Daily Dhyana practices to cultivate inner clarity, focus, and lasting peace.</p>
+      </div>
+      <div class="svc-card reveal" style="transition-delay:0.36s">
+        <span class="svc-num">04</span>
+        <h3 class="svc-title">Organisational Profit Growth</h3>
+        <p class="svc-body">ZED-based frameworks to double profits through quality, peace and dharmic leadership.</p>
+      </div>
+      <div class="svc-card reveal" style="transition-delay:0.48s">
+        <span class="svc-num">05</span>
+        <h3 class="svc-title">Courses</h3>
+        <div class="courses-list">
+          <a class="course-item" href="foundation-course.html">
+            <span class="course-num">1</span>
+            <div class="course-content">
+              <span class="course-name">Foundation Course</span>
+              <span class="course-level">Rishi · Samyak Drashti · Free · One-day course</span>
+            </div>
+          </a>
+          <a class="course-item" href="crash-course.html">
+            <span class="course-num">2</span>
+            <div class="course-content">
+              <span class="course-name">Crash Course</span>
+              <span class="course-level">Muni-Sadhak · Rs 100 fee · 7 days · Up to 2 hours daily</span>
+            </div>
+          </a>
+          <a class="course-item" href="kevalya-course.html">
+            <span class="course-num">3</span>
+            <div class="course-content">
+              <span class="course-name">Kevalya — DIY Course</span>
+              <span class="course-level">Yogeshwar · Arihant · 3-month deep course · Charges: contact mobile</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ YOUTUBE HIGHLIGHT ═══ -->
+<section class="yt-section" id="youtube">
+  <div class="yt-amb yt-amb-1"></div>
+  <div class="yt-amb yt-amb-2"></div>
+  <div class="yt-amb yt-amb-3"></div>
+  <div class="container">
+    <div class="yt-inner">
+
+      <!-- Left -->
+      <div class="reveal">
+        <span class="yt-eyebrow">
+          <span class="yt-eyebrow-dot"></span>Daily Sessions on YouTube
+        </span>
+        <div class="yt-rule"></div>
+        <h2 class="yt-heading">
+          Watch, Learn &amp;<br/><em>Transform Daily</em>
+        </h2>
+        <p class="yt-desc">
+          Join thousands of viewers for <strong>daily virtual Swadhyaya and Dhyan sessions</strong> — live on YouTube. Each session is a step toward the 4R life: Rupees, Respect, Relations &amp; Rest.
+        </p>
+
+        <div class="yt-stats">
+          <div class="yt-stat">
+            <span class="yt-stat-n">Daily</span>
+            <span class="yt-stat-l">Live Sessions</span>
+          </div>
+          <div class="yt-stat">
+            <span class="yt-stat-n">4R</span>
+            <span class="yt-stat-l">Life Framework</span>
+          </div>
+          <div class="yt-stat">
+            <span class="yt-stat-n">Free</span>
+            <span class="yt-stat-l">Open to All</span>
+          </div>
+        </div>
+
+        <div class="yt-topics">
+          <span class="yt-topic">🧘 Dhyan</span>
+          <span class="yt-topic">📖 Swadhyaya</span>
+          <span class="yt-topic">💰 Profit &amp; Peace</span>
+          <span class="yt-topic">🕉️ Jain Philosophy</span>
+          <span class="yt-topic">📿 Gita Wisdom</span>
+          <span class="yt-topic">⭕ Zero Mind</span>
+        </div>
+
+        <a href="https://www.youtube.com/@peacefulprofitmonk" target="_blank" class="yt-btn">
+          <span class="yt-btn-icon">▶</span>
+          <span class="yt-btn-text">Subscribe on YouTube</span>
+        </a>
+      </div>
+
+      <!-- Right — Channel Card -->
+      <div class="reveal" style="transition-delay:0.18s">
+        <div class="yt-card">
+
+          <!-- Fake thumbnail -->
+          <div class="yt-thumb">
+            <div class="yt-play-wrap">
+              <a href="https://www.youtube.com/@peacefulprofitmonk" target="_blank">
+                <div class="yt-play"><div class="yt-play-tri"></div></div>
+              </a>
+              <span class="yt-thumb-label">ध्यान · धन · साधना</span>
+            </div>
+          </div>
+
+          <!-- Channel bar -->
+          <div class="yt-channel-bar">
+            <div class="yt-avatar">ॐ</div>
+            <div>
+              <span class="yt-ch-name">Peaceful Profit Monk</span>
+              <span class="yt-ch-handle">@peacefulprofitmonk</span>
+            </div>
+            <div class="yt-live-badge">
+              <span class="yt-live-dot"></span>
+              <span class="yt-live-text">Daily</span>
+            </div>
+          </div>
+
+          <!-- Session list -->
+          <div class="yt-sessions">
+            <a href="https://www.youtube.com/@peacefulprofitmonk" target="_blank" class="yt-sess">
+              <span class="yt-sess-icon">🧘</span>
+              <div>
+                <span class="yt-sess-title">Morning Dhyan Session</span>
+                <span class="yt-sess-tag">Meditation · Daily Practice</span>
+              </div>
+              <span class="yt-sess-arrow">›</span>
+            </a>
+            <a href="https://www.youtube.com/@peacefulprofitmonk" target="_blank" class="yt-sess">
+              <span class="yt-sess-icon">📖</span>
+              <div>
+                <span class="yt-sess-title">Swadhyaya — Self Study</span>
+                <span class="yt-sess-tag">Jain · Gita · Wisdom</span>
+              </div>
+              <span class="yt-sess-arrow">›</span>
+            </a>
+            <a href="https://www.youtube.com/@peacefulprofitmonk" target="_blank" class="yt-sess">
+              <span class="yt-sess-icon">💼</span>
+              <div>
+                <span class="yt-sess-title">Peaceful Profit Masterclass</span>
+                <span class="yt-sess-tag">Business · Spirituality · ZED</span>
+              </div>
+              <span class="yt-sess-arrow">›</span>
+            </a>
+            <a href="https://www.youtube.com/@peacefulprofitmonk" target="_blank" class="yt-sess">
+              <span class="yt-sess-icon">⭕</span>
+              <div>
+                <span class="yt-sess-title">Zero Mind — Zero Defect</span>
+                <span class="yt-sess-tag">Quality · Excellence · India</span>
+              </div>
+              <span class="yt-sess-arrow">›</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="glow-div"></div>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="reveal">
+        <span class="eyebrow">Connect</span>
+        <div class="rule"></div>
+        <h2 class="sec-h">Begin Your<br/><em>Journey Today</em></h2>
+        <p class="contact-body">Reach out for consulting, ZED training, or to join the daily Dhyan &amp; Swadhyaya sessions. Every journey toward peaceful profit begins with a single, conscious step.</p>
+        <div class="c-hindi">
+          किसी को भी स्वाध्याय सुनकर जीवन में 4R — सम्पत्ति, सम्मान, सम्बन्ध, समाधि — सुलभ हो जाता है।
+        </div>
+      </div>
+      <div class="c-list reveal" style="transition-delay:0.15s">
+        <a href="tel:+919427611171" class="c-link">
+          <div class="c-icon ci-v">📞</div>
+          <div><span class="c-lbl">Phone</span><span class="c-val">+91 94276 11171</span></div>
+        </a>
+        <a href="https://linkedin.com/in/mishrilal-suriya-79361564" target="_blank" class="c-link">
+          <div class="c-icon ci-g">💼</div>
+          <div><span class="c-lbl">LinkedIn</span><span class="c-val">mishrilal-suriya</span></div>
+        </a>
+        <a href="https://www.youtube.com/@peacefulprofitmonk" target="_blank" class="c-link">
+          <div class="c-icon ci-c">▶</div>
+          <div><span class="c-lbl">YouTube</span><span class="c-val">@PeacefulProfitMonk</span></div>
+        </a>
+        <div class="c-link" style="cursor:default;">
+          <div class="c-icon ci-r">📍</div>
+          <div><span class="c-lbl">Location</span><span class="c-val">Vadodara, Gujarat, India</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-inner">
+      <span class="foot-name">M L Suriya</span>
+      <span class="foot-om">ॐ</span>
+      <span class="foot-copy">Here Quality Excellence Pvt. Ltd. · Vadodara · India</span>
+    </div>
+  </div>
+</footer>
+
+</div><!-- .rel -->
+
+<script>
+// Navbar scroll effect
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// Scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => io.observe(el));
+
+// Move portrait from About (page 2) to Hero (page 1)
+const heroPortraitSlot = document.getElementById('heroPortraitSlot');
+const aboutPortrait = document.querySelector('#about .about-photo-wrap');
+if (heroPortraitSlot && aboutPortrait) {
+  heroPortraitSlot.appendChild(aboutPortrait);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SPIRITUAL CANVAS — floating sacred symbols
+   Lotus petals, OM glyphs, mandalas, dots
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+(function(){
+  const canvas = document.getElementById('spiritual-canvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  function resize(){
+    canvas.width  = window.innerWidth;
+    canvas.height = document.body.scrollHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Particle types: lotus, om, mandala-ring, dot, petal
+  const SYMBOLS = ['ॐ','ॐ','☸','✦','❋','⊕','◎','॰'];
+  const COLORS  = [
+    'rgba(139,92,246,',
+    'rgba(167,139,250,',
+    'rgba(232,121,249,',
+    'rgba(240,192,64,',
+    'rgba(196,181,253,',
+    'rgba(107,53,200,',
+  ];
+
+  class Particle {
+    constructor(){this.reset(true);}
+    reset(init){
+      this.x     = Math.random() * canvas.width;
+      this.y     = init ? Math.random() * canvas.height : canvas.height + 60;
+      this.size  = 10 + Math.random() * 22;
+      this.speed = 0.18 + Math.random() * 0.32;
+      this.alpha = 0;
+      this.targetAlpha = 0.04 + Math.random() * 0.10;
+      this.fadeIn= true;
+      this.drift = (Math.random()-0.5) * 0.35;
+      this.rot   = Math.random() * Math.PI * 2;
+      this.rotSpeed = (Math.random()-0.5) * 0.008;
+      this.sym   = SYMBOLS[Math.floor(Math.random()*SYMBOLS.length)];
+      this.color = COLORS[Math.floor(Math.random()*COLORS.length)];
+      // type: 'symbol' | 'ring' | 'dot'
+      this.type  = Math.random() < 0.45 ? 'symbol' : Math.random() < 0.6 ? 'ring' : 'dot';
+    }
+    update(){
+      this.y    -= this.speed;
+      this.x    += this.drift;
+      this.rot  += this.rotSpeed;
+      if(this.fadeIn){
+        this.alpha = Math.min(this.alpha + 0.003, this.targetAlpha);
+        if(this.alpha >= this.targetAlpha) this.fadeIn = false;
+      }
+      if(this.y < -80) this.reset(false);
+    }
+    draw(){
+      ctx.save();
+      ctx.globalAlpha = this.alpha;
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rot);
+
+      if(this.type === 'symbol'){
+        ctx.font = `${this.size}px 'Noto Serif Devanagari', serif`;
+        ctx.fillStyle = this.color + '1)';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(this.sym, 0, 0);
+
+      } else if(this.type === 'ring'){
+        const r = this.size * 0.7;
+        ctx.strokeStyle = this.color + '1)';
+        ctx.lineWidth = 0.7;
+        // outer ring
+        ctx.beginPath();
+        ctx.arc(0, 0, r, 0, Math.PI*2);
+        ctx.stroke();
+        // inner spokes — mandala feel
+        const spokes = 6 + Math.floor(Math.random()*3);
+        for(let i=0;i<spokes;i++){
+          const a = (i/spokes)*Math.PI*2;
+          ctx.beginPath();
+          ctx.moveTo(0,0);
+          ctx.lineTo(Math.cos(a)*r, Math.sin(a)*r);
+          ctx.stroke();
+        }
+        // center dot
+        ctx.beginPath();
+        ctx.arc(0,0,1.5,0,Math.PI*2);
+        ctx.fillStyle = this.color + '1)';
+        ctx.fill();
+
+      } else {
+        // soft glowing dot
+        const grd = ctx.createRadialGradient(0,0,0,0,0,this.size*0.5);
+        grd.addColorStop(0, this.color + '0.8)');
+        grd.addColorStop(1, this.color + '0)');
+        ctx.beginPath();
+        ctx.arc(0,0,this.size*0.5,0,Math.PI*2);
+        ctx.fillStyle = grd;
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+  }
+
+  // Create particles — more on larger screens
+  const COUNT = Math.min(55, Math.floor(window.innerWidth / 26));
+  const particles = Array.from({length: COUNT}, () => new Particle());
+
+  // Floating lotus petal paths (CSS-complement)
+  class Petal {
+    constructor(){this.reset(true);}
+    reset(init){
+      this.x    = Math.random() * canvas.width;
+      this.y    = init ? Math.random() * canvas.height : canvas.height + 40;
+      this.w    = 6  + Math.random() * 10;
+      this.h    = 12 + Math.random() * 18;
+      this.speed= 0.25 + Math.random() * 0.4;
+      this.drift= (Math.random()-0.5)*0.5;
+      this.rot  = Math.random()*Math.PI*2;
+      this.rotS = (Math.random()-0.5)*0.012;
+      this.alpha= 0;
+      this.tAlpha= 0.04 + Math.random()*0.09;
+      const ci  = Math.floor(Math.random()*COLORS.length);
+      this.color= COLORS[ci];
+    }
+    update(){
+      this.y   -= this.speed;
+      this.x   += this.drift;
+      this.rot += this.rotS;
+      this.alpha= Math.min(this.alpha + 0.002, this.tAlpha);
+      if(this.y < -40) this.reset(false);
+    }
+    draw(){
+      ctx.save();
+      ctx.globalAlpha = this.alpha;
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rot);
+      ctx.beginPath();
+      // Ellipse petal
+      ctx.ellipse(0, 0, this.w/2, this.h/2, 0, 0, Math.PI*2);
+      const g = ctx.createRadialGradient(0,-this.h/4,0, 0,0,this.h/2);
+      g.addColorStop(0, this.color+'0.7)');
+      g.addColorStop(1, this.color+'0)');
+      ctx.fillStyle = g;
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  const PETAL_COUNT = Math.min(30, Math.floor(window.innerWidth / 45));
+  const petals = Array.from({length: PETAL_COUNT}, () => new Petal());
+
+  function animate(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    petals.forEach(p => { p.update(); p.draw(); });
+    particles.forEach(p => { p.update(); p.draw(); });
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+</script>
+
+</body>
+</html>
