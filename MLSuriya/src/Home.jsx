@@ -136,6 +136,19 @@ body{background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-
   filter:blur(30px);pointer-keys:none;z-index:0;}
 .svc-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(0,0,0,0.25);}
 
+.course-level-card{position:relative;overflow:hidden;transform:translateY(0)scale(1);
+  transition:transform .28s cubic-bezier(.22,.61,.36,1),box-shadow .28s ease,border-color .28s ease,background .28s ease;}
+.course-level-card::after{content:'';position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:linear-gradient(110deg,rgba(240,192,64,0.14),rgba(255,255,255,0.06) 36%,transparent 68%);
+  transition:opacity .28s ease;}
+.course-level-card:hover{transform:translateY(-3px)scale(1.01);border-color:rgba(240,192,64,0.55)!important;
+  box-shadow:0 16px 34px rgba(0,0,0,0.3),0 0 0 1px rgba(240,192,64,0.2) inset;
+  background:linear-gradient(120deg,rgba(255,255,255,0.20),rgba(255,255,255,0.09))!important;}
+.course-level-card:hover::after{opacity:1;}
+.course-level-card:hover .course-level-tag{transform:translateX(-2px)scale(1.04);
+  box-shadow:0 8px 18px rgba(240,192,64,0.45);}
+.course-level-tag{transition:transform .22s ease,box-shadow .22s ease;}
+
 .fw-card{background:rgba(255,255,255,0.05);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,0.09);
   border-radius:18px;padding:2.2rem 1.8rem;position:relative;overflow:hidden;transition:all .4s cubic-bezier(0.34,1.56,0.64,1);}
 .fw-card:hover{background:rgba(255,255,255,0.10);border-color:rgba(255,255,255,0.18);transform:translateY(-8px)scale(1.02);box-shadow:0 24px 50px rgba(0,0,0,0.35);}
@@ -522,13 +535,13 @@ function Services() {
   const cards = [
     {n:"01",title:"Technique of Stressfree",body:"Practical methods to reduce stress and build a calm, balanced mind in daily life.",delay:0},
     {n:"02",title:"Career Counselling",body:"Guidance to choose the right career path based on strengths, goals, and long-term growth.",delay:0.12},
-    {n:"03",title:"Meditation Mastery",body:"Daily Dhyana practices to cultivate inner clarity, focus, and lasting peace.",delay:0.24},
-    {n:"04",title:"Organisational Profit Growth",body:"ZED-based frameworks to double profits through quality, peace and dharmic leadership.",delay:0.36},
+    {n:"03",title:"Career and Computze Counselling",body:"Personalized guidance for career direction and growth through practical counselling.",delay:0.24},
+    {n:"04",title:"How to Face Interview Confidently",body:"Step-by-step mentoring to improve interview confidence, communication, and performance.",delay:0.36},
   ];
   const courses = [
-    {num:1,name:"Foundation Course",level:"Rishi · Samyak Drashti · Free · One-day course",href:"/courses/foundation"},
-    {num:2,name:"Crash Course",level:"Muni-Sadhak · Rs 100 fee · 7 days · Up to 2 hours daily",href:"/courses/crash"},
-    {num:3,name:"Kevalya — DIY Course",level:"Yogeshwar · Arihant · 3-month deep course · Charges: contact mobile",href:"/courses/kevalya"},
+    {num:1,name:"Foundation Course",levelType:"Basic",level:"Rishi · Samyak Drashti · Free · One-day course",href:"/courses/foundation"},
+    {num:2,name:"Crash Course",levelType:"Intermediate",level:"Muni-Sadhak · Rs 100 fee · 7 days · Up to 2 hours daily",href:"/courses/crash"},
+    {num:3,name:"Kevalya — DIY Course",levelType:"Advance",level:"Yogeshwar · Arihant · 3-month deep course · Charges: contact mobile",href:"/courses/kevalya"},
   ];
   return (
     <section id="services" style={{padding:"7rem 0",background:"var(--bg)",position:"relative",zIndex:1}}>
@@ -547,19 +560,116 @@ function Services() {
             </div>
           ))}
           {/* Courses card */}
-          <div className="svc-card reveal" style={{transitionDelay:"0.48s"}}>
+          <div id="courses-card" className="svc-card reveal" style={{transitionDelay:"0.48s",gridColumn:"1 / -1"}}>
             <span className="font-display" style={{fontSize:"3.8rem",fontWeight:700,display:"block",lineHeight:1,marginBottom:"0.5rem",color:"#fff",position:"relative",zIndex:1}}>05</span>
             <h3 className="font-display" style={{fontSize:"1.3rem",fontWeight:700,color:"var(--gold)",marginBottom:"1rem",position:"relative",zIndex:1}}>Courses</h3>
+            <div style={{display:"inline-flex",alignItems:"center",gap:"0.45rem",padding:"0.45rem 0.85rem",marginBottom:"0.95rem",borderRadius:999,background:"rgba(240,192,64,0.16)",border:"1px solid rgba(240,192,64,0.45)",boxShadow:"0 0 22px rgba(240,192,64,0.18)",width:"fit-content",position:"relative",zIndex:1}}>
+              <span style={{fontSize:"0.76rem",fontWeight:700,letterSpacing:"0.08em",textTransform:"uppercase",color:"#ffe6a0"}}>3 Levels of Course</span>
+            </div>
             <div style={{display:"flex",flexDirection:"column",gap:"0.9rem",flex:1,position:"relative",zIndex:1}}>
-              {courses.map(({num,name,level,href})=>(
-                <Link key={num} to={href} style={{display:"flex",alignItems:"flex-start",gap:"0.9rem",textDecoration:"none",color:"inherit"}}>
-                  <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"0.85rem",fontWeight:700,color:"#fff",background:"linear-gradient(135deg,var(--p600),var(--p400))",width:28,height:28,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>{num}</span>
-                  <div>
-                    <span style={{fontSize:"0.82rem",fontWeight:600,color:"#fff",display:"block"}}>{name}</span>
-                    <span style={{fontSize:"0.7rem",color:"rgba(255,255,255,0.54)",display:"block",fontWeight:400}}>{level}</span>
+              {courses.map(({num,name,levelType,level,href})=>(
+                <Link key={num} to={href} className="course-level-card" style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:"1rem",textDecoration:"none",color:"inherit",padding:"0.9rem 1rem",borderRadius:14,background:"linear-gradient(120deg,rgba(255,255,255,0.14),rgba(255,255,255,0.06))",border:"1px solid rgba(255,255,255,0.24)",boxShadow:"0 10px 24px rgba(0,0,0,0.22)",transition:"all .25s"}}>
+                  <div style={{display:"flex",alignItems:"flex-start",gap:"0.9rem"}}>
+                    <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"0.9rem",fontWeight:700,color:"#1f0f3f",background:"linear-gradient(135deg,var(--gold),#ffe39c)",width:34,height:34,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,boxShadow:"0 6px 16px rgba(240,192,64,0.45)"}}>{num}</span>
+                    <div>
+                      <span style={{fontSize:"0.9rem",fontWeight:700,color:"#fff",display:"block",lineHeight:1.2,marginBottom:"0.25rem"}}>{name}</span>
+                      <span style={{fontSize:"0.72rem",color:"rgba(255,255,255,0.75)",display:"block",fontWeight:500,lineHeight:1.45}}>{level}</span>
+                    </div>
                   </div>
+                  <span className="course-level-tag" style={{fontSize:"0.62rem",fontWeight:700,letterSpacing:"0.08em",textTransform:"uppercase",color:"#2d154f",background:"linear-gradient(135deg,#f9e08f,#ffd266)",borderRadius:999,padding:"0.42rem 0.75rem",border:"1px solid rgba(255,255,255,0.5)",whiteSpace:"nowrap",boxShadow:"0 4px 14px rgba(240,192,64,0.35)"}}>{levelType}</span>
                 </Link>
               ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   SECTION: Student Reading (4th R)
+───────────────────────────────────────────── */
+function StudentReading() {
+  const points = [
+    "4th R in the 4R pathway: Reading.",
+    "Reading builds clarity before action and strengthens decision quality.",
+    "Worth Rupees (4R): Read what improves your value, wisdom, and financial awareness.",
+    "Daily reading with reflection turns knowledge into practical results.",
+  ];
+
+  return (
+    <section id="student-reading" style={{padding:"7rem 0 5.5rem",position:"relative",zIndex:1}}>
+      <div style={{maxWidth:1160,margin:"0 auto",padding:"0 2.5rem"}}>
+        <div className="reveal" style={{display:"grid",gridTemplateColumns:"1.05fr 0.95fr",gap:"2rem",alignItems:"stretch"}}>
+          <div className="glass" style={{padding:"2rem 2rem 1.9rem"}}>
+            <span style={{display:"block",fontSize:"0.65rem",fontWeight:600,letterSpacing:"0.3em",textTransform:"uppercase",color:"var(--p600)"}}>To Offer Students</span>
+            <div style={{width:36,height:"2.5px",background:"linear-gradient(90deg,var(--p500),var(--rose))",borderRadius:2,margin:"0.85rem 0"}}/>
+            <h2 className="font-display" style={{fontSize:"clamp(2rem,3.8vw,3.2rem)",fontWeight:700,lineHeight:1.1,color:"var(--ink)",marginBottom:"0.9rem"}}>
+              Reading <em style={{fontStyle:"italic",fontWeight:400,color:"var(--p600)"}}>(4th R)</em>
+            </h2>
+            <p style={{fontSize:"0.97rem",lineHeight:1.82,color:"var(--muted)",marginBottom:"1.1rem"}}>
+              A focused reading practice for students under the 4R model, designed to improve understanding, values, and lifelong growth.
+            </p>
+            <ul style={{margin:0,paddingLeft:"1.1rem",color:"var(--ink2)",lineHeight:1.85}}>
+              {points.map((item) => (
+                <li key={item} style={{marginBottom:"0.3rem"}}>{item}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="glass" style={{padding:"2rem",display:"flex",flexDirection:"column",justifyContent:"center",position:"relative",overflow:"hidden"}}>
+            <div style={{position:"absolute",width:240,height:240,top:-80,right:-60,borderRadius:"50%",background:"radial-gradient(circle,rgba(240,192,64,0.24)0%,transparent 72%)",filter:"blur(4px)",pointerEvents:"none"}}/>
+            <span style={{fontSize:"0.62rem",fontWeight:700,letterSpacing:"0.2em",textTransform:"uppercase",color:"var(--p600)",marginBottom:"0.65rem",position:"relative",zIndex:1}}>Worth Rupees (4R)</span>
+            <p className="font-display" style={{fontSize:"1.8rem",lineHeight:1.25,color:"var(--ink)",position:"relative",zIndex:1}}>
+              you are not just student ,
+              <br/>
+              <span style={{fontStyle:"italic",fontWeight:700,background:"linear-gradient(120deg,var(--p700),var(--rose))",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",backgroundClip:"text"}}>
+                you are prudent
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   SECTION: Feedback Impact
+───────────────────────────────────────────── */
+function FeedbackImpact() {
+  const feedbackTopics = [
+    "Purpose of life",
+    "What is life",
+    "What all you want in life",
+    "Learning life-transforming case studies",
+    "Experiencing endless happiness",
+  ];
+
+  return (
+    <section id="feedback" style={{padding:"0 0 6.5rem",position:"relative",zIndex:1}}>
+      <div style={{maxWidth:1160,margin:"0 auto",padding:"0 2.5rem"}}>
+        <div className="reveal glass" style={{padding:"2.2rem 2rem 2rem",position:"relative",overflow:"hidden"}}>
+          <div style={{position:"absolute",width:300,height:300,right:-100,bottom:-120,borderRadius:"50%",background:"radial-gradient(circle,rgba(139,92,246,0.2)0%,transparent 70%)",pointerEvents:"none"}}/>
+          <span style={{display:"block",fontSize:"0.65rem",fontWeight:600,letterSpacing:"0.3em",textTransform:"uppercase",color:"var(--p600)",position:"relative",zIndex:1}}>
+            How Course Has Helped Peoples
+          </span>
+          <div style={{width:36,height:"2.5px",background:"linear-gradient(90deg,var(--p500),var(--rose))",borderRadius:2,margin:"0.85rem 0",position:"relative",zIndex:1}}/>
+          <h2 className="font-display" style={{fontSize:"clamp(2rem,3.8vw,3rem)",fontWeight:700,lineHeight:1.12,color:"var(--ink)",marginBottom:"0.95rem",position:"relative",zIndex:1}}>
+            Feedback <em style={{fontStyle:"italic",fontWeight:400,color:"var(--p600)"}}>That Transforms</em>
+          </h2>
+          <p style={{fontSize:"0.97rem",lineHeight:1.82,color:"var(--muted)",marginBottom:"1rem",position:"relative",zIndex:1}}>
+            Participants consistently report clarity, direction, and inner stability after completing the course journey.
+          </p>
+          <div style={{display:"grid",gridTemplateColumns:"repeat(2,minmax(0,1fr))",gap:"0.75rem",position:"relative",zIndex:1}}>
+            {feedbackTopics.map((item) => (
+              <div key={item} style={{padding:"0.85rem 1rem",borderRadius:12,background:"rgba(255,255,255,0.62)",border:"1px solid rgba(255,255,255,0.88)",boxShadow:"0 4px 18px rgba(107,53,200,0.08)",color:"var(--ink2)",fontSize:"0.9rem",fontWeight:500}}>
+                {item}
+              </div>
+            ))}
+            <div style={{gridColumn:"1 / -1",padding:"0.9rem 1rem",borderRadius:12,background:"linear-gradient(120deg,rgba(139,92,246,0.14),rgba(232,121,249,0.1))",border:"1px solid rgba(139,92,246,0.3)",boxShadow:"0 6px 18px rgba(107,53,200,0.12)",color:"var(--p800)",fontSize:"0.95rem",fontWeight:700,textAlign:"center"}}>
+              The integrated answer to these five dimensions is the 4R framework.
             </div>
           </div>
         </div>
@@ -723,6 +833,20 @@ function Footer() {
 ───────────────────────────────────────────── */
 export default function App() {
   useReveal();
+
+  useEffect(() => {
+    if (window.location.hash !== "#courses-card") return;
+
+    const scrollToCoursesCard = () => {
+      const el = document.getElementById("courses-card");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+
+    window.requestAnimationFrame(scrollToCoursesCard);
+    const t = window.setTimeout(scrollToCoursesCard, 180);
+    return () => window.clearTimeout(t);
+  }, []);
+
   return (
     <div style={{position:"relative"}}>
       {/* Aura background */}
@@ -742,6 +866,8 @@ export default function App() {
         <div style={{height:1,background:"linear-gradient(90deg,transparent,var(--p400),var(--rose),transparent)",opacity:0.35,position:"relative",zIndex:1}}/>
         <Philosophy/>
         <Services/>
+        <StudentReading/>
+        <FeedbackImpact/>
         <YouTube/>
         <div style={{height:1,background:"linear-gradient(90deg,transparent,var(--p400),var(--rose),transparent)",opacity:0.35,position:"relative",zIndex:1}}/>
         <Contact/>
